@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +22,8 @@ public class AddressController {
 	private IAddressService addrService;
 	
 	private List<AddressDto> addrList;
-
+	
+	@Autowired
 	public AddressController(IAddressService addrService) {
 		this.addrService = addrService;
 	}

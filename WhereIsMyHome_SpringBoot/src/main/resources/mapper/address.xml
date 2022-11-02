@@ -4,17 +4,22 @@
 
 <mapper namespace="com.ssafy.addr.dto.mapper.AddressMapper">
 
-	<resultMap type="addressDto" id="address">
+	<resultMap type="AddressDto" id="sido">
 		<result column="sidoName" property="name" />
-		<result column="gugunName" property="name" />
-		<result column="dongName" property="name" />
 		<result column="sidoCode" property="code" />
+	</resultMap>
+	
+	<resultMap type="AddressDto" id="gugun">
+		<result column="gugunName" property="name" />
 		<result column="gugunCode" property="code" />
+	</resultMap>
+	
+	<resultMap type="AddressDto" id="dong">
+		<result column="dongName" property="name" />
 		<result column="dongCode" property="code" />
-		
 	</resultMap>
 
-	<select id="getSidoList" resultType="addressDto">
+	<select id="getSidoList" resultType="sido">
 		select sidoName,
 		substring(dongCode, 1, 2) as "sidoCode"
 		from dongCode
@@ -23,7 +28,7 @@
 	</select>
 
 	<select id="getGugunList" parameterType="String"
-		resultType="address">
+		resultType="gugun">
 		select gugunName, substring(dongCode, 1, 5) as "gugunCode" from dongCode
 		where dongCode
 		like '" + #{sidoCode} + "%' and dongName is null and
@@ -32,7 +37,7 @@
 	</select>
 
 	<select id="getDongList" parameterType="String"
-		resultType="address">
+		resultType="dong">
 		"select dongName, dongCode from dongCode where dongCode like '" + #{gugunCode} +
 		"%' and dongName is not null
 	</select>

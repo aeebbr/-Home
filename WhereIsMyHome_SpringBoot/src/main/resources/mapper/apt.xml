@@ -18,7 +18,7 @@
 		<result column="aptCode" property="aptCode"/>
 	</resultMap>
 	
-	<select id="selectAptList" parameterType="map" resultType="apt">
+	<select id="selectAptList" parameterType="map" resultMap="apt">
 		select houseinfo.apartmentName, housedeal.floor, housedeal.area, dongcode.sidoName, dongcode.gugunName, houseinfo.dong, housedeal.dealAmount, houseinfo.lat, houseinfo.lng, houseinfo.dongCode, houseinfo.aptCode, houseinfo.jibun
 		from houseinfo inner join housedeal on (houseinfo.aptCode = housedeal.aptCode)
 		inner join dongcode on (houseinfo.dongCode = dongcode.dongCode)

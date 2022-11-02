@@ -127,10 +127,10 @@ public class MemberController {
 
 				response.addCookie(cookie);
 
-				return "redirect:/";
+				return "redirect:/index";
 			} else {
 				model.addAttribute("msg", "아이디 또는 비밀번호 확인 후 다시 로그인하세요!");
-				return "user/login";
+				return "index";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -156,7 +156,7 @@ public class MemberController {
 
 		try {
 			memberService.joinMember(memberDto);
-			return "redirect:/user/login";
+			return "redirect:index";
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.addAttribute("msg", "회원 가입 처리중 에러 발생!!!");

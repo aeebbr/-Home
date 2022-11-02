@@ -15,7 +15,7 @@
 	<header id="header" class="header fixed-top d-flex align-items-center">
 		<div
 			class="container d-flex align-items-center justify-content-between">
-			<a href="${root }/index.jsp"
+			<a href="${root }/"
 				class="logo d-flex align-items-center me-auto me-lg-0"> <!-- Uncomment the line below if you also wish to use an image logo -->
 				<h1>
 					구해줘 Home<span>.</span>

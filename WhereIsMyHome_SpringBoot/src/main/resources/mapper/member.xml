@@ -24,9 +24,8 @@
 
 	<insert id="joinMember" parameterType="memberDto">
 		insert into members
-		(user_name, user_id, user_password, email_id, email_domain, join_date)
-		values (#{username}, #{userid}, #{userpwd}, #{useraddr},
-		#{userphonenumber}, now())
+		(user_id, user_name, user_password, user_address, user_phone_number, join_date)
+		values (#{userid}, #{username}, #{userpwd}, #{useraddr}, #{userphonenumber}, now())
 	</insert>
 
 	<select id="loginMember" parameterType="map" resultMap="member">

@@ -134,18 +134,13 @@ public class MemberController {
 		return "redirect:/";
 	}
 
-	@GetMapping("/join")
-	public String join() {
-		return "user/join";
-	}
-
 	@PostMapping("/join")
-	private String join(MemberDto memberDto, Model model) {
-		logger.debug("member info: {}", memberDto.getUserId());
+	private String join(@RequestParam Map<String, String> map, MemberDto memberDto, Model model) {
+		logger.debug("member info: {}", map.get("userid"));
 
 		try {
-			memberService.joinMember(memberDto);
-			return "redirect:index";
+			memberService.joinMember(map);
+			return "redirect:/";
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.addAttribute("msg", "회원 가입 처리중 에러 발생!!!");

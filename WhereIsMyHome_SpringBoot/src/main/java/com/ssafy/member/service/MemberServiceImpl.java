@@ -6,12 +6,14 @@ import com.ssafy.member.dto.mapper.MemberMapper;
 import java.sql.SQLException;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class MemberServiceImpl implements MemberService {
 	private MemberMapper memberMapper;
 
+	@Autowired
 	private MemberServiceImpl(MemberMapper memberMapper) {
 		this.memberMapper = memberMapper;
 	}

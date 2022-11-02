@@ -3,6 +3,7 @@ package com.ssafy.favor.service;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ssafy.favor.dto.FavorDto;
@@ -12,6 +13,7 @@ import com.ssafy.favor.dto.mapper.FavorMapper;
 public class FavorServiceImpl implements FavorService {
 	private FavorMapper favorMapper;
 
+	@Autowired
 	private FavorServiceImpl(FavorMapper favorMapper) {
 		this.favorMapper = favorMapper;
 	}

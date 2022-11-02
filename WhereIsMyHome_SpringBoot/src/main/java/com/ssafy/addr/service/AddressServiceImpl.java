@@ -2,6 +2,7 @@ package com.ssafy.addr.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ssafy.addr.dto.AddressDto;
@@ -11,6 +12,7 @@ import com.ssafy.addr.dto.mapper.AddressMapper;
 public class AddressServiceImpl implements IAddressService {
 	private AddressMapper addressMapper;
 	
+	@Autowired
 	private AddressServiceImpl(AddressMapper addressMapper) {
 		this.addressMapper = addressMapper;
 	}

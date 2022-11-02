@@ -13,9 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ssafy.member.dto.MemberDto;
 import com.ssafy.member.service.MemberService;
@@ -157,15 +159,12 @@ public class MemberController {
 		}
 	}
 
-//	private int idCheck(HttpServletRequest request, HttpServletResponse response) {
-//		String userId = request.getParameter("userid");
-//
-//		try {
-//			int count = memberService.idCheck(userId);
-//			return count;
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		return 500;
-//	}
+	@GetMapping("/{userid}")
+	@ResponseBody
+	public String idCheck(@PathVariable("userid") String userId) throws Exception {
+		logger.debug("idCheck userid : {}", userId);
+		int cnt = memberService.idCheck(userId);
+		return cnt + "";
+	}
+
 }

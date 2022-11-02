@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ssafy.member.dto.MemberDto;
 import com.ssafy.member.service.MemberService;
@@ -37,20 +38,22 @@ public class MemberController {
 	}
 
 	@GetMapping("/info")
-	private String info(HttpSession session, Model model) {
+	private String info(RedirectAttributes redirectAtt, HttpSession session, Model model) {
 		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
 
 		String userId = memberDto.getUserId();
+		System.out.println(userId);
 
 		try {
 			memberDto = memberService.infoMember(userId);
-			model.addAttribute("member", memberDto);
 
-			return "/index.jsp";
+			redirectAtt.addFlashAttribute("member", memberDto);
+			
+			return "redirect:/";
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.addAttribute("msg", "로그인 처리중 에러 발생!!!");
-			return "/error/error.jsp";
+			return "/error/error";
 		}
 	}
 

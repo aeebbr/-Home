@@ -41,7 +41,7 @@ const handleClickloginCancle = () => {
 	idValidEl.innerText = '';
 	passwordValidEl.innerText = '';
 // loginFailed.innerText = '';
-	window.location.href ="/whereismyhome_be/index.jsp";	
+	window.location.href ="/";	
 };
 
 // 모달 세팅
@@ -64,7 +64,7 @@ if(document.querySelector('#info-id')) {
 // 회원 정보 모달 닫기
 const handleClickInfoClose = () => {
 	document.querySelector('#btn-close-info').click();
-	window.location.href ="/whereismyhome_be/index.jsp";	
+	window.location.href ="/";	
 };
 
 // 회원 정보 수정

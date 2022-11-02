@@ -257,7 +257,6 @@
 				<!-- Modal body -->
 				<div class="modal-body">
 					<form id="form-login" method="POST" action="">
-						<input type="hidden" name="act" value="login" />
 						<div class="row">
 							<div class="input-wrapper row mb-3">
 								<div class="col-md-3">

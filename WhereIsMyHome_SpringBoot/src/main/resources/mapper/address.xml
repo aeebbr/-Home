@@ -4,7 +4,7 @@
 
 <mapper namespace="com.ssafy.addr.dto.mapper.AddressMapper">
 
-	<resultMap type="AddressDto" id="address">
+	<resultMap type="addressDto" id="address">
 		<result column="sidoName" property="name" />
 		<result column="gugunName" property="name" />
 		<result column="dongName" property="name" />
@@ -14,7 +14,7 @@
 		
 	</resultMap>
 
-	<select id="getSidoList" resultType="AddressDto">
+	<select id="getSidoList" resultType="addressDto">
 		select sidoName,
 		substring(dongCode, 1, 2) as "sidoCode"
 		from dongCode

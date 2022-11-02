@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.ssafy.apt.dto.mapper.aptMapper">
+<mapper namespace="com.ssafy.apt.dto.mapper.AptMapper">
 	
 	<resultMap type="aptDto" id="apt">
 		<result column="sidoName" property="sidoName"/>

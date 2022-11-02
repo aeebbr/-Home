@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.ssafy.member.model.mapper.MemberMapper">
+<mapper namespace="com.ssafy.member.dto.mapper.MemberMapper">
 
 	<resultMap type="memberDto" id="member">
 		<result column="user_id" property="userId" />
@@ -12,59 +12,52 @@
 	<resultMap type="memberDto" id="memberAll" extends="member">
 		<result column="user_password" property="userPwd" />
 		<result column="user_address" property="userAddr" />
-		<result column="user_phone_number" property="userPhoneNumber" />
-		<result column="join_date" property="joinDate" />
+		<result column="user_phone_number" property="userPhoneNum" />
 	</resultMap>
 
 	<select id="idCheck" parameterType="String" resultType="int">
 		select
 		count(user_id)
 		from members
-		where user_id = #{userid}
+		where user_id = #{userId}
 	</select>
 
 	<insert id="joinMember" parameterType="memberDto">
 		insert into members
-		(user_id, user_name, user_password, user_address,
-		user_phone_number,
-		join_date)
+		(user_name, user_id, user_password, email_id, email_domain, join_date)
 		values (#{userName}, #{userId}, #{userPwd}, #{userAddr},
-		#{userPhoneNumber}, now())
+		#{userPhoneNum}, now())
 	</insert>
 
 	<select id="loginMember" parameterType="map" resultMap="member">
 		select
-		user_name
+		user_id, user_name
 		from members
-		where user_id = #{userId} and user_password =
-		#{userPwd}
+		where user_id = #{userId} and
+		user_password = #{userPwd}
 	</select>
 
-	<!-- delete -->
-	<delete id="deleteMember" parameterType="String">
-		delete from members
-		where user_id = #{userId}
-	</delete>
-
-	<!-- info -->
-	<select id="infoMember" parameterType="String"
-		resultMap="member">
-		select user_id,
-		user_name, user_password, user_address,
+	<select id="infoMember" parameterType="string"
+		resultMap="memberAll">
+		select user_id, user_name, user_password, user_address,
 		user_phone_number
 		from members
 		where user_id = #{userId}
 	</select>
 
-	<!-- modify -->
 	<update id="modifyMember" parameterType="memberDto">
 		update
 		members
 		set
 		user_name = #{userName}, user_password = #{userPwd}, user_address =
-		#{userAddr}, user_phone_number
-		= #{userPhoneNumber}
+		#{userAddr}, user_phone_number = #{userPhoneNumber}
 		where user_id
 		=#{userId}
 	</update>
+
+	<delete id="deleteMember" parameterType="String">
+		delete from members
+		where user_id = #{userId}
+	</delete>
+
 </mapper>

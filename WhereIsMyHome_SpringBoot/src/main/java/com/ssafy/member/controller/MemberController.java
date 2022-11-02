@@ -47,7 +47,7 @@ public class MemberController {
 			memberDto = memberService.infoMember(userId);
 
 			redirectAtt.addFlashAttribute("member", memberDto);
-			
+
 			return "redirect:/";
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -63,18 +63,18 @@ public class MemberController {
 		try {
 			memberService.deleteMember(memberDto.getUserId());
 			logout(session);
-			return "/user/login";
+			return "redirect:/";
 		} catch (SQLException e) {
 			e.printStackTrace();
 			model.addAttribute("msg", "회원 탈퇴 처리중 에러 발생!!!");
-			return "/error/error.jsp";
+			return "/error/error";
 		}
 	}
 
 	@PostMapping("/modify")
 	private String modify(@RequestParam Map<String, String> map, MemberDto memberDto, Model model) {
 		logger.debug("modify user : {}", map.get("name"));
-		
+
 		try {
 			memberService.modifyMember(map);
 			return "redirect:/user/info";

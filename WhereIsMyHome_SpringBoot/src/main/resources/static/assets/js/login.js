@@ -205,6 +205,6 @@ const handleClickInfoModi = () => {
 // 회원 탈퇴 클릭
 const handleClickDel = () => {
 	if (window.confirm('탈퇴하시겠습니까?')) {
-		window.location.href = "/whereismyhome_be/user/delete";
+		window.location.href = "/user/delete";
 	}
 };

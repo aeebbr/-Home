@@ -5,8 +5,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.ssafy.favor.dao.FavorDao;
-import com.ssafy.favor.dao.FavorDaoImpl;
 import com.ssafy.favor.dto.FavorDto;
 import com.ssafy.favor.dto.mapper.FavorMapper;
 

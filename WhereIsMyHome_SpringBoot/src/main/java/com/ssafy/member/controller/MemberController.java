@@ -141,7 +141,7 @@ public class MemberController {
 
 	@PostMapping("/join")
 	private String join(MemberDto memberDto, Model model) {
-		logger.debug("member info: {}", memberDto);
+		logger.debug("member info: {}", memberDto.getUserId());
 
 		try {
 			memberService.joinMember(memberDto);

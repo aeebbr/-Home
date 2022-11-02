@@ -1,53 +1,48 @@
 package com.ssafy.member.service;
 
 import com.ssafy.member.dto.MemberDto;
+import com.ssafy.member.dto.mapper.MemberMapper;
 
 import java.sql.SQLException;
 
-import com.ssafy.member.dao.MemberDao;
-import com.ssafy.member.dao.MemberDaoImpl;
+import org.springframework.stereotype.Service;
 
+@Service
 public class MemberServiceImpl implements MemberService {
+	private MemberMapper memberMapper;
 
-	private static MemberService memberService = new MemberServiceImpl();
-	private MemberDao memberDao;
-
-	private MemberServiceImpl() {
-		memberDao = MemberDaoImpl.getMemberDao();
-	}
-
-	public static MemberService getMemberService() {
-		return memberService;
+	private MemberServiceImpl(MemberMapper memberMapper) {
+		this.memberMapper = memberMapper;
 	}
 
 	@Override
 	public int idCheck(String userId) throws Exception {
-		return memberDao.idCheck(userId);
+		return memberMapper.idCheck(userId);
 	}
 
 	@Override
 	public void joinMember(MemberDto memberDto) throws Exception {
-		memberDao.joinMember(memberDto);
+		memberMapper.joinMember(memberDto);
 	}
 
 	@Override
 	public MemberDto loginMember(String userId, String userPwd) throws Exception {
-		return memberDao.loginMember(userId, userPwd);
+		return memberMapper.loginMember(userId, userPwd);
 	}
 
 	@Override
 	public void deleteMember(String userId) throws SQLException {
-		memberDao.deleteMember(userId);
+		memberMapper.deleteMember(userId);
 	}
 
 	@Override
 	public MemberDto infoMember(String userId) throws SQLException {
-		return memberDao.infoMember(userId);
+		return memberMapper.infoMember(userId);
 	}
 
 	@Override
 	public void modifyMember(MemberDto memberDto) throws SQLException {
-		memberDao.modifyMember(memberDto);
+		memberMapper.modifyMember(memberDto);
 	}
 
 }

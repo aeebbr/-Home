@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.ssafy.addr.dto.mapper.addressMapper">
+<mapper namespace="com.ssafy.addr.dto.mapper.AddressMapper">
 
 	<resultMap type="AddressDto" id="address">
 		<result column="sidoName" property="name" />

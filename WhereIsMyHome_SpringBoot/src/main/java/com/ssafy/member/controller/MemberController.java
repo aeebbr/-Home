@@ -42,7 +42,6 @@ public class MemberController {
 		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
 
 		String userId = memberDto.getUserId();
-		System.out.println(userId);
 
 		try {
 			memberDto = memberService.infoMember(userId);
@@ -74,29 +73,15 @@ public class MemberController {
 
 	@PostMapping("/modify")
 	private String modify(@RequestParam Map<String, String> map, MemberDto memberDto, Model model) {
-//		String id = request.getParameter("id");
-//		String pw = request.getParameter("pw");
-//		String name = request.getParameter("name");
-//		String addr = request.getParameter("addr");
-//		String pNum = request.getParameter("pNumber");
-
-//		MemberDto memberDto = new MemberDto();
-
-//		memberDto.setUserId(id);
-//		memberDto.setUserPwd(pw);
-//		memberDto.setUserName(name);
-//		memberDto.setUserAddr(addr);
-//		memberDto.setUserPhoneNum(pNum);
-
-		logger.debug("modify user : {}", map.get("id"));
-
+		logger.debug("modify user : {}", map.get("name"));
+		
 		try {
-			memberService.modifyMember(memberDto);
-			return "/user/info";
+			memberService.modifyMember(map);
+			return "redirect:/user/info";
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.addAttribute("msg", "회원 가입 처리중 에러 발생!!!");
-			return "/error/error.jsp";
+			return "/error/error";
 		}
 	}
 

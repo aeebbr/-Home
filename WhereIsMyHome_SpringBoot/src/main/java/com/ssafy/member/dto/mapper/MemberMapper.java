@@ -20,5 +20,5 @@ public interface MemberMapper {
 
 	MemberDto infoMember(String userId) throws SQLException;
 
-	void modifyMember(MemberDto memberDto) throws SQLException;
+	void modifyMember(Map<String, String> map) throws SQLException;
 }

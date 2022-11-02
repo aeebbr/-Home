@@ -12,6 +12,6 @@ public interface MemberService {
 	MemberDto loginMember(Map<String, String> map) throws Exception; // 로그인
 	void deleteMember(String userId) throws SQLException; // 회원 탈퇴 
 	MemberDto infoMember(String userId) throws SQLException;
-	void modifyMember(MemberDto memberDto) throws SQLException;
+	void modifyMember(Map<String, String> map) throws SQLException;
 	
 }

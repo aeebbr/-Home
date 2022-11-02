@@ -44,14 +44,14 @@
 		where user_id = #{userId}
 	</select>
 
-	<update id="modifyMember" parameterType="memberDto">
+	<update id="modifyMember" parameterType="map">
 		update
 		members
 		set
-		user_name = #{userName}, user_password = #{userPwd}, user_address =
-		#{userAddr}, user_phone_number = #{userPhoneNumber}
+		user_name = #{name}, user_password = #{pw}, user_address =
+		#{addr}, user_phone_number = #{pNumber}
 		where user_id
-		=#{userId}
+		=#{id}
 	</update>
 
 	<delete id="deleteMember" parameterType="String">

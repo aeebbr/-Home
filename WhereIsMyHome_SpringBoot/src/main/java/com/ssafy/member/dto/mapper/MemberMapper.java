@@ -14,7 +14,7 @@ public interface MemberMapper {
 
 	void joinMember(MemberDto memberDto) throws Exception; // 회원가입
 
-	MemberDto loginMember(String userId, String userPwd) throws Exception; // 로그인
+	MemberDto loginMember(Map<String, String> map) throws Exception; // 로그인
 
 	void deleteMember(String userId) throws SQLException; // 회원 탈퇴
 

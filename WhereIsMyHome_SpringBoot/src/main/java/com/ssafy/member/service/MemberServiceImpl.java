@@ -4,6 +4,7 @@ import com.ssafy.member.dto.MemberDto;
 import com.ssafy.member.dto.mapper.MemberMapper;
 
 import java.sql.SQLException;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -26,8 +27,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public MemberDto loginMember(String userId, String userPwd) throws Exception {
-		return memberMapper.loginMember(userId, userPwd);
+	public MemberDto loginMember(Map<String, String> map) throws Exception {
+		return memberMapper.loginMember(map);
 	}
 
 	@Override

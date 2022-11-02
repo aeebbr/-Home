@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.apt.dto.mapper.aptMapper">
+	
+	<resultMap type="aptDto" id="apt">
+		<result column="sidoName" property="sidoName"/>
+		<result column="gugunName" property="gugunName"/>
+		<result column="dong" property="dongName"/>
+		<result column="jibun" property="jibun"/>
+		<result column="apartmentName" property="aptName"/>
+		<result column="floor" property="floor"/>
+		<result column="area" property="area"/>
+		<result column="dealAmount" property="dealAmount"/>
+		<result column="lat" property="lat"/>
+		<result column="lng" property="lng"/>
+		<result column="aptCode" property="aptCode"/>
+	</resultMap>
+	
+	<select id="selectAptList" parameterType="map" resultType="aptDto">
+		select houseinfo.apartmentName, housedeal.floor, housedeal.area, dongcode.sidoName, dongcode.gugunName, houseinfo.dong, housedeal.dealAmount, houseinfo.lat, houseinfo.lng, houseinfo.dongCode, houseinfo.aptCode, houseinfo.jibun
+		from houseinfo inner join housedeal on (houseinfo.aptCode = housedeal.aptCode)
+		inner join dongcode on (houseinfo.dongCode = dongcode.dongCode)
+		where dongcode.sidoName=#{sido} and dongcode.gugunName=#{gugun} and dongcode.dongName=#{dong}
+	</select>
+	
+</mapper>

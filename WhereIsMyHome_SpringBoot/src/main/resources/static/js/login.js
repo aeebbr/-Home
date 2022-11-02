@@ -8,7 +8,7 @@ const handleClickLogin = () => {
 	
 	if (id && password) {
 		const form = document.querySelector("#form-login");
-		form.setAttribute("action", "/whereismyhome_be/user");
+		form.setAttribute("action", "/whereismyhome_be/user/join");
 		form.submit();
 	}
 	if (!id) {

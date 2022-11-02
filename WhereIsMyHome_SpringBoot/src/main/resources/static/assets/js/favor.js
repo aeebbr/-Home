@@ -12,5 +12,5 @@ const handleClickAddRegion = () => {
 	const gugunName = gugunEl.options[gugunEl.selectedIndex].text;
 	const dongName = dongEl.options[dongEl.selectedIndex].text;
 	
-	location.href = `/whereismyhome_be/favor/insert?sidoCode=${sidoCode}&gugunCode=${gugunCode}&dongCode=${dongCode}&sidoName=${sidoName}&gugunName=${gugunName}&dongName=${dongName}`;
+	location.href = `/favor/insert?sidoCode=${sidoCode}&gugunCode=${gugunCode}&dongCode=${dongCode}&sidoName=${sidoName}&gugunName=${gugunName}&dongName=${dongName}`;
 };

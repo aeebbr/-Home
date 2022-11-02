@@ -24,7 +24,7 @@
 		= #{dongCode})
 	</insert>
 
-	<select id="listFavor" parameterType="String" resultType="favor">
+	<select id="listFavor" parameterType="String" resultMap="favor">
 		select * from favor where user_id = #{userId} order by id
 	</select>
 

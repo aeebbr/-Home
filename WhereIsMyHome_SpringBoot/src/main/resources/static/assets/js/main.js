@@ -1,4 +1,4 @@
-fetch("/whereismyhome_be/addr/sido")
+fetch("/addr/sido")
 .then(response => response.json())
 .then(data => {
     let sidoSel = document.querySelector("#sido");
@@ -20,7 +20,7 @@ document.querySelector("#sido").addEventListener("change", function() {
     let sidoSel = document.querySelector("#sido");
     let sidoCode = sidoSel.options[sidoSel.selectedIndex].value;
     
-    fetch(`/whereismyhome_be/addr/gugun?sido=${sidoCode}`)
+    fetch(`/addr/gugun?sido=${sidoCode}`)
         .then(response => response.json())
         .then(data => {
             console.log(data.addrList);
@@ -48,7 +48,7 @@ document.querySelector("#gugun").addEventListener("change", function() {
     let gugunSel = document.querySelector("#gugun");
     let gugunCode = gugunSel.options[gugunSel.selectedIndex].value;
     
-    fetch(`/whereismyhome_be/addr/dong?gugun=${gugunCode}`)
+    fetch(`/addr/dong?gugun=${gugunCode}`)
         .then(response => response.json())
         .then(data => {
             console.log(data.addrList);

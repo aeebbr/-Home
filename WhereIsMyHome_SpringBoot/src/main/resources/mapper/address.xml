@@ -19,7 +19,7 @@
 		<result column="dongCode" property="code" />
 	</resultMap>
 
-	<select id="getSidoList" resultType="sido">
+	<select id="getSidoList" resultMap="sido">
 		select sidoName,
 		substring(dongCode, 1, 2) as "sidoCode"
 		from dongCode
@@ -27,8 +27,8 @@
 		null and dongName is null
 	</select>
 
-	<select id="getGugunList" parameterType="String"
-		resultType="gugun">
+	<select id="getGugunList" parameterType="string"
+		resultMap="gugun">
 		select gugunName, substring(dongCode, 1, 5) as "gugunCode" from dongCode
 		where dongCode
 		like '" + #{sidoCode} + "%' and dongName is null and
@@ -36,8 +36,8 @@
 		null
 	</select>
 
-	<select id="getDongList" parameterType="String"
-		resultType="dong">
+	<select id="getDongList" parameterType="string"
+		resultMap="dong">
 		"select dongName, dongCode from dongCode where dongCode like '" + #{gugunCode} +
 		"%' and dongName is not null
 	</select>

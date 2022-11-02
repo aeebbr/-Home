@@ -83,7 +83,7 @@ const handleClickOpenModi = () => {
 	
 	info.innerHTML = `
   <div class="modal-body" id="user-form">
-            <form id ="form-modify" method="post" action="/whereismyhome_be/user/modify">
+            <form id ="form-modify" method="post" action="/user/modify">
               <div class="row">
                 <div class="row mb-3">
                   <div class="col-md-3">

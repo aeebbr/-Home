@@ -68,7 +68,6 @@
 					<div class="region-sub-title">지역을 선택해서 시세를 알아보세요</div>
 				</div>
 				<form action="apt" method="get">
-					<input type="hidden" name="action" value="aptlist">
 					<div class="row col-md-12 justify-content-center mb-2">
 						<div class="form-group col-md-2">
 							<select class="form-select bg-secondary text-light" id="sido">
@@ -166,7 +165,6 @@
 				<!-- Modal body -->
 				<div class="modal-body">
 					<form id="form-join" method="POST">
-						<input type="hidden" name="act" value="join" />
 						<div class="row">
 							<div class="input-wrapper row mb-3">
 								<div class="col-md-3">

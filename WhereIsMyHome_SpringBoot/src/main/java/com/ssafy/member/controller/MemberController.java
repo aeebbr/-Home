@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -96,16 +97,20 @@ public class MemberController {
 		}
 	}
 
-	@GetMapping("/login")
-	public String login() {
-		return "user/login";
-	}
+//	@GetMapping("/login")
+//	public String login() {
+//		logger.info("login111111111111111111!!!!");
+//
+//		return "user/login";
+//	}
 
+//	@RequestMapping(value="/login", method = {RequestMethod.POST})
 	@PostMapping("/login")
 	public String login(@RequestParam Map<String, String> map, Model model, HttpSession session,
 			HttpServletResponse response) {
 //		String userId = map.get("userid");
 //		String userPwd = map.get("userpwd");
+		logger.info("login2222222222222!!!!");
 
 		logger.debug("map : {}", map.get("userid"));
 

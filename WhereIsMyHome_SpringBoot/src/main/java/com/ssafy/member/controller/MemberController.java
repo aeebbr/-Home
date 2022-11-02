@@ -97,20 +97,9 @@ public class MemberController {
 		}
 	}
 
-//	@GetMapping("/login")
-//	public String login() {
-//		logger.info("login111111111111111111!!!!");
-//
-//		return "user/login";
-//	}
-
-//	@RequestMapping(value="/login", method = {RequestMethod.POST})
 	@PostMapping("/login")
 	public String login(@RequestParam Map<String, String> map, Model model, HttpSession session,
 			HttpServletResponse response) {
-//		String userId = map.get("userid");
-//		String userPwd = map.get("userpwd");
-		logger.info("login2222222222222!!!!");
 
 		logger.debug("map : {}", map.get("userid"));
 
@@ -127,7 +116,7 @@ public class MemberController {
 
 				response.addCookie(cookie);
 
-				return "redirect:/index";
+				return "redirect:/";
 			} else {
 				model.addAttribute("msg", "아이디 또는 비밀번호 확인 후 다시 로그인하세요!");
 				return "index";

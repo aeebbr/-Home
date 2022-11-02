@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.addr.dto.mapper.addressMapper">
+
+	<resultMap type="AddressDto" id="address">
+		<result column="sidoName" property="name" />
+		<result column="gugunName" property="name" />
+		<result column="dongName" property="name" />
+		<result column="sidoCode" property="code" />
+		<result column="gugunCode" property="code" />
+		<result column="dongCode" property="code" />
+		
+	</resultMap>
+
+	<select id="getSidoList" resultType="AddressDto">
+		select sidoName,
+		substring(dongCode, 1, 2) as "sidoCode"
+		from dongCode
+		where gugunName is
+		null and dongName is null
+	</select>
+
+	<select id="getGugunList" parameterType="String"
+		resultType="address">
+		select gugunName, substring(dongCode, 1, 5) as "gugunCode" from dongCode
+		where dongCode
+		like '" + #{sidoCode} + "%' and dongName is null and
+		gugunName is not
+		null
+	</select>
+
+	<select id="getDongList" parameterType="String"
+		resultType="address">
+		"select dongName, dongCode from dongCode where dongCode like '" + #{gugunCode} +
+		"%' and dongName is not null
+	</select>
+
+</mapper>

@@ -16,7 +16,7 @@ const handleClickSignup = () => {
   
   // id 중복 여부 유효성 검사
   if(id) {
-	fetch("/whereismyhome_be/user?act=idcheck&userid=" + id)
+	fetch("/whereismyhome_be/user/" + userid)
 		.then(response => response.text())
 		.then(data => {
 			 if(data == 0) {

@@ -34,6 +34,7 @@ public class AddressController {
 
 		JSONObject json = buildJsonObj(addrList);
 		try {
+			res.setCharacterEncoding("UTF-8");
 			res.getWriter().write(json.toJSONString());
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -45,6 +46,7 @@ public class AddressController {
 
 		JSONObject json = buildJsonObj(addrList);
 		try {
+			res.setCharacterEncoding("UTF-8");
 			res.getWriter().write(json.toJSONString());
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -56,6 +58,7 @@ public class AddressController {
 
 		JSONObject json = buildJsonObj(addrList);
 		try {
+			res.setCharacterEncoding("UTF-8");
 			res.getWriter().write(json.toJSONString());
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -75,7 +78,7 @@ public class AddressController {
 
 		JSONObject jsonObj = new JSONObject();
 		jsonObj.put("addrList", jsonArr);
-
+		
 		return jsonObj;
 	}
 }

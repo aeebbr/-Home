@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -26,7 +27,7 @@ public class FavorController {
 	public FavorController(FavorService favorService) {
 		this.favorService = favorService;
 	}
-	
+
 	@GetMapping("/delete")
 	private String delete(@RequestParam("id") String id, Model model) {
 		try {
@@ -56,10 +57,15 @@ public class FavorController {
 	}
 
 	@GetMapping("/insert")
+	private String insert() {
+		return "favor/favor";
+	}
+
+	@PostMapping("/insert")
 	private String insert(@RequestParam("sidoCode") String sidoCode, @RequestParam("gugunCode") String gugunCode,
 			@RequestParam("dongCode") String dongCode, @RequestParam("sidoName") String sidoName,
-			@RequestParam("gugunName") String gugunName, @RequestParam("dongName") String dongName,
-			HttpSession session, Model model) {
+			@RequestParam("gugunName") String gugunName, @RequestParam("dongName") String dongName, HttpSession session,
+			Model model) {
 		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
 
 		String userId = memberDto.getUserId();

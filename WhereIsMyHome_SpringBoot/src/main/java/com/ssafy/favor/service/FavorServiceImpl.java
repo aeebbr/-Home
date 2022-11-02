@@ -3,30 +3,29 @@ package com.ssafy.favor.service;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.ssafy.favor.dao.FavorDao;
 import com.ssafy.favor.dao.FavorDaoImpl;
 import com.ssafy.favor.dto.FavorDto;
+import com.ssafy.favor.dto.mapper.FavorMapper;
 
+@Service
 public class FavorServiceImpl implements FavorService {
-	private static FavorService favorService = new FavorServiceImpl();
-	private FavorDao favorDao;
+	private FavorMapper favorMapper;
 
-	private FavorServiceImpl() {
-		favorDao = FavorDaoImpl.getFavorDao();
-	}
-
-	public static FavorService getFavorService() {
-		return favorService;
+	private FavorServiceImpl(FavorMapper favorMapper) {
+		this.favorMapper = favorMapper;
 	}
 
 	@Override
 	public void insertFavor(FavorDto favorDto) throws SQLException {
-		favorDao.insertFavor(favorDto);
+		favorMapper.insertFavor(favorDto);
 	}
 
 	@Override
 	public List<FavorDto> listFavor(String userId) throws SQLException {
-		List<FavorDto> list = favorDao.listFavor(userId);
+		List<FavorDto> list = favorMapper.listFavor(userId);
 
 		for (int i = 0; i < list.size() - 1; i++) {
 			for (int j = i + 1; j < list.size(); j++) {
@@ -79,7 +78,7 @@ public class FavorServiceImpl implements FavorService {
 
 	@Override
 	public void deleteFavor(String id) throws SQLException {
-		favorDao.deleteFavor(id);
+		favorMapper.deleteFavor(id);
 	}
 
 }

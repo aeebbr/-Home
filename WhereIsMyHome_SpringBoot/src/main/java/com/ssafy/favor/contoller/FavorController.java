@@ -4,13 +4,23 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.ContentDisposition;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ssafy.favor.dto.FavorDto;
 import com.ssafy.favor.service.FavorService;
@@ -19,17 +29,18 @@ import com.ssafy.member.dto.MemberDto;
 import com.ssafy.member.service.MemberService;
 import com.ssafy.member.service.MemberServiceImpl;
 
-/**
- * Servlet implementation class FavorController
- */
-@WebServlet("/favor")
-public class FavorController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-
-	private FavorService favorService;
-
-	public void init() {
-		favorService = FavorServiceImpl.getFavorService();
+@Controller
+@RequestMapping("/favor")
+public class FavorController {
+	
+	@Autowired
+	private ServletContext servletContext;
+	
+	private final FavorService favorService;
+	
+	@Autowired
+	public FavorController(FavorService favorService) {
+		this.favorService = favorService;
 	}
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -54,37 +65,27 @@ public class FavorController extends HttpServlet {
 			forward(req, res, path);
 		}
 	}
-
-	private String delete(HttpServletRequest req, HttpServletResponse res) {
-		String id = req.getParameter("id");
-		
-		try {
-			favorService.deleteFavor(id);
-			
-			return "/favor?act=list";
-		} catch (Exception e) {
-			e.printStackTrace();
-			req.setAttribute("msg", "회원 가입 처리중 에러 발생!!!");
-			return "/error/error.jsp";
-		}
+	
+	@GetMapping("/delete")
+	private String delete(@RequestParam("id") String id) {
+		favorService.deleteFavor(id);
+		return "favor/list";
 	}
-
-	private String list(HttpServletRequest req, HttpServletResponse res) {
-		HttpSession session = req.getSession();
+	
+	@GetMapping("/list")
+	private String list(HttpSession session, Model model) {
 		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
-
 		String userId = memberDto.getUserId();
-
 		try {
 			List<FavorDto> list = favorService.listFavor(userId);
 
-			req.setAttribute("regions", list);
+			model.addAttribute("regions", list);
 
-			return "/assets/favor/favorList.jsp";
+			return "favor/favorList";
 		} catch (Exception e) {
 			e.printStackTrace();
-			req.setAttribute("msg", "회원 가입 처리중 에러 발생!!!");
-			return "/error/error.jsp";
+			model.addAttribute("msg", "회원 가입 처리중 에러 발생!!!");
+			return "error/error";
 		}
 	}
 
@@ -121,25 +122,5 @@ public class FavorController extends HttpServlet {
 			req.setAttribute("msg", "회원 가입 처리중 에러 발생!!!");
 			return "/error/error.jsp";
 		}
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
-
-	private void forward(HttpServletRequest request, HttpServletResponse response, String path)
-			throws ServletException, IOException {
-		RequestDispatcher dispatcher = request.getRequestDispatcher(path);
-		dispatcher.forward(request, response);
-	}
-
-	private void redirect(HttpServletRequest request, HttpServletResponse response, String path) throws IOException {
-		response.sendRedirect(request.getContextPath() + path);
 	}
 }

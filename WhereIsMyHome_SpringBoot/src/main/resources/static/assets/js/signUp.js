@@ -16,7 +16,7 @@ const handleClickSignup = () => {
   
   // id 중복 여부 유효성 검사
   if(id) {
-	fetch("/whereismyhome_be/user/" + userid)
+	fetch("/user/" + userid)
 		.then(response => response.text())
 		.then(data => {
 			 if(data == 0) {
@@ -26,7 +26,7 @@ const handleClickSignup = () => {
 				 
 				 if (id && password && name && address && phoneNumber) {
 					 let form = document.querySelector("#form-join");
-					 form.setAttribute("action", "/whereismyhome_be/user");
+					 form.setAttribute("action", "/user");
 					 
 					 form.submit();
 				 }				 

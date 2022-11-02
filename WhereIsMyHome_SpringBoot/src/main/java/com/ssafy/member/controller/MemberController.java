@@ -58,7 +58,7 @@ public class MemberController {
 		try {
 			memberService.deleteMember(memberDto.getUserId());
 			logout(session);
-			return "/user?act=mvlogin";
+			return "/user/login";
 		} catch (SQLException e) {
 			e.printStackTrace();
 			model.addAttribute("msg", "회원 탈퇴 처리중 에러 발생!!!");
@@ -86,7 +86,7 @@ public class MemberController {
 
 		try {
 			memberService.modifyMember(memberDto);
-			return "/user?act=info";
+			return "/user/info";
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.addAttribute("msg", "회원 가입 처리중 에러 발생!!!");

@@ -83,7 +83,7 @@ const handleClickOpenModi = () => {
 	
 	info.innerHTML = `
   <div class="modal-body" id="user-form">
-            <form id ="form-modify" method="post" action="/whereismyhome_be/user?act=modify">
+            <form id ="form-modify" method="post" action="/whereismyhome_be/user/modify">
               <div class="row">
                 <div class="row mb-3">
                   <div class="col-md-3">
@@ -182,7 +182,7 @@ const handleClickInfoModi = () => {
 		
 		document.querySelector('#form-modify').submit();
 		
-// location.href = "/whereismyhome_be/user?act=modify";
+// location.href = "/whereismyhome_be/user/modify";
 	}
 	
 	if (!id) {
@@ -205,6 +205,6 @@ const handleClickInfoModi = () => {
 // 회원 탈퇴 클릭
 const handleClickDel = () => {
 	if (window.confirm('탈퇴하시겠습니까?')) {
-		window.location.href = "/whereismyhome_be/user?act=delete";
+		window.location.href = "/whereismyhome_be/user/delete";
 	}
 };

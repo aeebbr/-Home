@@ -19,7 +19,7 @@ const handleClickLogin = () => {
 	}
 };
 
-//const loginFailed = document.querySelector('.login-failed').innerText;
+const loginFailed = document.querySelector('.login-failed').innerText;
 
 const openLogin = () => {
 	const loginNav = document.querySelector('#nav-login');
@@ -28,9 +28,9 @@ const openLogin = () => {
 }
 
 // 로그인 실패 문구가 존재한다면 모달 open
-//if(loginFailed !== "") {
-//	openLogin();
-//}
+if(loginFailed !== "") {
+	openLogin();
+}
 
 // 로그인 모달 닫기
 const handleClickloginCancle = () => {

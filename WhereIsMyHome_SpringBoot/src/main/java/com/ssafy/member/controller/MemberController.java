@@ -86,7 +86,7 @@ public class MemberController {
 	}
 
 	@PostMapping("/login")
-	public String login(@RequestParam Map<String, String> map, Model model, HttpSession session,
+	public String login(@RequestParam Map<String, String> map, RedirectAttributes redirectAtt, Model model, HttpSession session,
 			HttpServletResponse response) {
 
 		logger.debug("map : {}", map.get("userid"));
@@ -106,13 +106,13 @@ public class MemberController {
 
 				return "redirect:/";
 			} else {
-				model.addAttribute("msg", "아이디 또는 비밀번호 확인 후 다시 로그인하세요!");
-				return "index";
+				redirectAtt.addFlashAttribute("msg", "아이디 또는 비밀번호 확인 후 다시 로그인하세요!");
+				return "redirect:/";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.addAttribute("msg", "로그인 중 문제 발생!!!");
-			return "/error/error.jsp";
+			return "/error/error";
 		}
 	}
 
@@ -132,7 +132,7 @@ public class MemberController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.addAttribute("msg", "회원 가입 처리중 에러 발생!!!");
-			return "/error/error.jsp";
+			return "/error/error";
 		}
 	}
 

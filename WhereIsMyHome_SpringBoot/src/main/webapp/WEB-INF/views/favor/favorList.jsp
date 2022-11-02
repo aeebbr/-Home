@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="root" value="${pageContext.request.contextPath}"></c:set>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,58 +34,51 @@
 <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
 
 <!-- Template Main CSS File -->
-<link href="../css/main.css" rel="stylesheet" />
-<link rel="stylesheet" href="../css/mainCustom.css" />
+<link href="/assets/css/main.css" rel="stylesheet" />
+<link rel="stylesheet" href="/assets/css/mainCustom.css" />
+<link rel="stylesheet" href="/assets/css/favorList.css" />
 </head>
 <body>
-	<%@ include file="/common/header.jsp"%>
+	<%@ include file="../common/header.jsp"%>
 
 	<main id="main">
 	<div class="breadcrumbs">
 		<div class="container">
-			<div class="region-container" id="region">
-				<div class="region-title-container">
-					<div class="region-title">관심 지역 등록</div>
-					<div class="region-sub-title">관심 지역을 등록하세요</div>
-				</div>
-				<form method="post" action="${root }/favor">
-					<input type="hidden" name="act" value="insert">
-					<div class="row col-md-12 justify-content-center mb-2">
-						<div class="form-group col-md-2">
-							<select class="form-select bg-secondary text-light" id="sido"
-								name="sidoCode">
-								<option value="">도/광역시</option>
-							</select>
-						</div>
-						<div class="form-group col-md-2">
-							<select class="form-select bg-secondary text-light" id="gugun"
-								name="gugunCode">
-								<option value="">시/구/군</option>
-							</select>
-						</div>
-						<div class="form-group col-md-2">
-							<select class="form-select bg-secondary text-light" id="dong"
-								name="dongCode">
-								<option value="">동</option>
-							</select>
+			<div class="page-title-container">
+				<div class="page-title">관심 지역 목록</div>
+			</div>
+			<div class="favor-list-container">
+				<!-- 등록된 지역이 없다면  -->
+				<c:if test="${empty regions}">
+					<div class="nothing-container">
+						<div class="nothing-title">등록된 관심 지역이 없습니다</div>
+						<div class="insert-banner-container"
+							onclick="location.href=`${root }/favor/insert`">
+							<div class="insert-banner-title">관심 지역 등록하러 가기</div>
 						</div>
 					</div>
-					<div class="region-button-wrapper">
-						<button type="button" class="btn" id="btn-main"
-							onclick="handleClickAddRegion()">등록</button>
+				</c:if>
+				<!-- for each start -->
+				<c:forEach var="region" items="${regions}">
+					<div class="favor-list-wrapper">
+						<div class="favor-list-region">
+							<div class="favor-list-sido">${region.sidoName }</div>
+							<div class="favor-list-gugun">${region.gugunName }</div>
+							<div class="favor-list-dong">${region.dongName }</div>
+						</div>
+						<div class="favor-list-btn-container">
+							<div id="${region.id }"
+								class="favor-list-btn-wrapper favor-list-btn-del">삭제</div>
+						</div>
 					</div>
-				</form>
+				</c:forEach>
+				<!-- for each end -->
 			</div>
 		</div>
 	</div>
 	</main>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-		crossorigin="anonymous"></script>
-	<script src="../js/favor.js"></script>
-	<script src="../js/logout.js"></script>
-	<script src="../js/nav.js"></script>
-	<script src="../js/main.js"></script>
+	<script src="/whereismyhome_be/assets/js/favorList.js"></script>
+	<script src="/whereismyhome_be/assets/js/logout.js"></script>
+	<script src="/whereismyhome_be/assets/js/nav.js"></script>
 </body>
 </html>

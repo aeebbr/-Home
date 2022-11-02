@@ -28,7 +28,7 @@ public class FavorController {
 	}
 	
 	@GetMapping("/delete")
-	private String delete(@RequestParam String id, Model model) {
+	private String delete(@RequestParam("id") String id, Model model) {
 		try {
 			favorService.deleteFavor(id);
 		} catch (SQLException e) {

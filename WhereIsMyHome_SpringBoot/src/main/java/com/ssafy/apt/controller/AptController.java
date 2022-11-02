@@ -1,60 +1,35 @@
 package com.ssafy.apt.controller;
 
-import java.io.IOException;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ssafy.apt.dto.AptDto;
 import com.ssafy.apt.service.AptServiceImpl;
 
-@WebServlet("/apt")
-public class AptController extends HttpServlet {
-	private static final long serialVersionUID = 5061579799838944624L;
-
+@Controller
+@RequestMapping("/apt")
+public class AptController {
+	
 	private AptServiceImpl aptService;
 
-	@Override
-	public void init() throws ServletException {
-		super.init();
-		aptService = AptServiceImpl.getAptInstance();
+	@Autowired
+	public AptController(AptServiceImpl aptService) {
+		this.aptService = aptService;
 	}
 
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		String action = req.getParameter("action");
-		System.out.println(action);
-		String url = "";
-		
-		if (action.equals("aptlist")) {
-			url = selectAptList(req, res, url);
-			foward(req, res, url);
-		} //
-	}
-
-	private void foward(HttpServletRequest req, HttpServletResponse res, String url) {
-		RequestDispatcher dispatcher = req.getRequestDispatcher(url);
-		try {
-			dispatcher.forward(req, res);
-		} catch (ServletException | IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	private String selectAptList(HttpServletRequest req, HttpServletResponse res, String url) {
-		String sido = req.getParameter("sido");
-		String gugun = req.getParameter("gugun");
-		String dong = req.getParameter("dong");
+	@GetMapping("/aptlist")
+	private String selectAptList(@RequestParam("sido") String sido, @RequestParam("gugun") String gugun,
+			@RequestParam("dong") String dong, String url, Model model) {
 		
 		List<AptDto> aptList = aptService.selectAptList(sido, gugun, dong);
-		req.setAttribute("aptList", aptList);
+		model.addAttribute("aptList", aptList);
 		
-		url = "aptlist.jsp";
-		return url;
+		return "aptlist";
 	}
 }

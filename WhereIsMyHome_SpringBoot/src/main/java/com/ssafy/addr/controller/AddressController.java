@@ -2,53 +2,32 @@ package com.ssafy.addr.controller;
 
 import java.io.IOException;
 import java.util.List;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ssafy.addr.dto.AddressDto;
-import com.ssafy.addr.service.AddressServiceImpl;
+import com.ssafy.addr.service.IAddressService;
 
-@WebServlet("/addr")
-public class AddressController extends HttpServlet {
-	private static final long serialVersionUID = -3039549227896163104L;
+@Controller
+@RequestMapping("/addr")
+public class AddressController {
 
-	private AddressServiceImpl addrService;
+	private IAddressService addrService;
+	
 	private List<AddressDto> addrList;
 
-	@Override
-	public void init() throws ServletException {
-		super.init();
-		addrService = AddressServiceImpl.getInstance();
+	public AddressController(IAddressService addrService) {
+		this.addrService = addrService;
 	}
 
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		String action = req.getParameter("action");
-		System.out.println(action);
-
-		res.setContentType("application/json;charset=utf-8");
-		if (action.equals("sido")) {
-			getSidoList(req, res);
-			return;
-		} //
-		else if (action.equals("gugun")) {
-			getGugunList(req, res);
-			return;
-		} //
-		else if (action.equals("dong")) {
-			getDongList(req, res);
-			return;
-		}
-	}
-
-	private void getDongList(HttpServletRequest req, HttpServletResponse res) {
-		String gugunCode = req.getParameter("gugun");
+	@GetMapping("/dong")
+	private void getDongList(@RequestParam("gugun") String gugunCode, HttpServletResponse res) {
 		addrList = addrService.getDongList(gugunCode);
 
 		JSONObject json = buildJsonObj(addrList);
@@ -58,9 +37,8 @@ public class AddressController extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-
-	private void getGugunList(HttpServletRequest req, HttpServletResponse res) {
-		String sidoCode = req.getParameter("sido");
+	@GetMapping("/gugun")
+	private void getGugunList(@RequestParam("sido") String sidoCode, HttpServletResponse res) {
 		addrList = addrService.getGugunList(sidoCode);
 
 		JSONObject json = buildJsonObj(addrList);
@@ -70,8 +48,8 @@ public class AddressController extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-
-	private void getSidoList(HttpServletRequest req, HttpServletResponse res) {
+	@GetMapping("/sido")
+	private void getSidoList(HttpServletResponse res) {
 		addrList = addrService.getSidoList();
 
 		JSONObject json = buildJsonObj(addrList);

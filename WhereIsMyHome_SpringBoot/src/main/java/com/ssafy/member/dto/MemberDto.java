@@ -1,7 +1,9 @@
 package com.ssafy.member.dto;
 
-public class MemberDto {
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
+public class MemberDto {
 	private String userId;
 	private String userName;
 	private String userPwd;

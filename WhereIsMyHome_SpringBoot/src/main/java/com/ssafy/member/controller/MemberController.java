@@ -102,19 +102,19 @@ public class MemberController {
 	@PostMapping("/login")
 	public String login(@RequestParam Map<String, String> map, Model model, HttpSession session,
 			HttpServletResponse response) {
-		String userId = map.get("userid");
-		String userPwd = map.get("userpwd");
+//		String userId = map.get("userid");
+//		String userPwd = map.get("userpwd");
 
 		logger.debug("map : {}", map.get("userid"));
 
 		try {
-			MemberDto memberDto = memberService.loginMember(userId, userPwd);
+			MemberDto memberDto = memberService.loginMember(map);
 			logger.debug("memberDto : {}", memberDto);
 
 			if (memberDto != null) { // 로그인 성공
 				session.setAttribute("userinfo", memberDto);
 
-				Cookie cookie = new Cookie("ssafy_id", userId);
+				Cookie cookie = new Cookie("ssafy_id", map.get("userid"));
 				cookie.setMaxAge(60 * 60 * 24 * 365 * 40);
 //					cookie.setPath("/user");
 

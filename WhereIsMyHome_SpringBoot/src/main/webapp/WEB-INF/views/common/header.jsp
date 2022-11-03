@@ -49,7 +49,7 @@
 						<li class="nav-item"><a class="nav-link" aria-current="page"
 							href="#">주변탐방</a></li>
 						<li class="nav-item"><a class="nav-link" aria-current="page"
-							href="${root }/favor/insert">관심지역 등록</a></li>
+							href="${root }/favor/favor">관심지역 등록</a></li>
 						<li class="nav-item"><a class="nav-link" aria-current="page"
 							href="${root }/favor/list">관심지역 둘러보기</a></li>
 					</ul>

@@ -27,8 +27,6 @@ public class AptController {
 	private String selectAptList(@RequestParam("sido") String sido, @RequestParam("gugun") String gugun,
 			@RequestParam("dong") String dong, String url, Model model) {
 
-		System.out.println("asfasfsdfsdf");
-
 		List<AptDto> aptList = aptService.selectAptList(sido, gugun, dong);
 		model.addAttribute("aptList", aptList);
 

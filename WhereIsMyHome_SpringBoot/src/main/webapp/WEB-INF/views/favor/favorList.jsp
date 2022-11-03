@@ -77,8 +77,8 @@
 		</div>
 	</div>
 	</main>
-	<script src="/whereismyhome_be/assets/js/favorList.js"></script>
-	<script src="/whereismyhome_be/assets/js/logout.js"></script>
-	<script src="/whereismyhome_be/assets/js/nav.js"></script>
+	<script src="/assets/js/favorList.js"></script>
+	<script src="/assets/js/logout.js"></script>
+	<script src="/assets/js/nav.js"></script>
 </body>
 </html>

@@ -36,7 +36,7 @@ public class FavorController {
 			e.printStackTrace();
 			model.addAttribute("msg", "회원 가입 처리중 에러 발생!!!");
 		}
-		return "favor/list";
+		return "redirect:/favor/list";
 	}
 
 	@GetMapping("/list")
@@ -85,7 +85,7 @@ public class FavorController {
 		try {
 			favorService.insertFavor(favorDto);
 
-			return "favor/favorList";
+			return "redirect:/favor/list";
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.addAttribute("msg", "회원 가입 처리중 에러 발생!!!");

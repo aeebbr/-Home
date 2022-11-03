@@ -62,17 +62,17 @@ public class MemberController {
 	}
 
 	@GetMapping("/delete")
-	private String delete(HttpSession session, Model model) {
+	private ResponseEntity<?> delete(HttpSession session, Model model) {
 		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
 
 		try {
 			memberService.deleteMember(memberDto.getUserId());
 			logout(session);
-			return "redirect:/";
+			return ResponseEntity.status(HttpStatus.ACCEPTED).build();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			model.addAttribute("msg", "회원 탈퇴 처리중 에러 발생!!!");
-			return "/error/error";
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
 	}
 
@@ -94,8 +94,6 @@ public class MemberController {
 	@ResponseBody
 	public ResponseEntity<?> login(MultipartHttpServletRequest req, RedirectAttributes redirectAtt, Model model,
 			HttpSession session, HttpServletResponse response) {
-//		public ResponseEntity<?> login(@RequestParam Map<String, String> map, RedirectAttributes redirectAtt, Model model,
-//				HttpSession session, HttpServletResponse response) {
 
 		logger.debug("map : {}", req.getParameter("userid"));
 		Map<String, String> map = new HashMap<>();
@@ -115,14 +113,11 @@ public class MemberController {
 
 				response.addCookie(cookie);
 
-//				return "redirect:/";
 				return ResponseEntity.status(HttpStatus.ACCEPTED).build();
 			} else {
 				System.out.println("로그인 실패");
 				redirectAtt.addFlashAttribute("msg", "아이디 또는 비밀번호 확인 후 다시 로그인하세요!");
 				return ResponseEntity.status(100).build();
-
-//				return "redirect:/";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -133,9 +128,13 @@ public class MemberController {
 	}
 
 	@GetMapping("/logout")
-	public String logout(HttpSession session) {
-		session.invalidate();
-		return "redirect:/";
+	public ResponseEntity<?> logout(HttpSession session) {
+		try {
+			session.invalidate();
+			return ResponseEntity.status(HttpStatus.ACCEPTED).build();			
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();			
+		}
 	}
 
 	@PostMapping("/join")

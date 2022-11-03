@@ -213,6 +213,11 @@ const handleClickInfoModi = () => {
 // 회원 탈퇴 클릭
 const handleClickDel = () => {
   if (window.confirm("탈퇴하시겠습니까?")) {
+    fetch("/user/delete").then((res) => {
+      if (res.status === 202) {
+        location.href = `/`;
+      }
+    });
     window.location.href = "/user/delete";
   }
 };

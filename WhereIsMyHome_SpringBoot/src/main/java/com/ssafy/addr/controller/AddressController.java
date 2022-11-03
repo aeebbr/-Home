@@ -7,17 +7,15 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.addr.dto.AddressDto;
 import com.ssafy.addr.service.IAddressService;
 
-@Controller
+@RestController
 @RequestMapping("/addr")
 public class AddressController {
 
@@ -39,7 +37,7 @@ public class AddressController {
 
 		JSONObject json = buildJsonObj(addrList);
 		try {
-			res.setCharacterEncoding("UTF-8");
+			res.setContentType("application/json;charset=UTF-8");
 			res.getWriter().write(json.toJSONString());
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -55,7 +53,7 @@ public class AddressController {
 
 		JSONObject json = buildJsonObj(addrList);
 		try {
-			res.setCharacterEncoding("UTF-8");
+			res.setContentType("application/json;charset=UTF-8");
 			res.getWriter().write(json.toJSONString());
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -72,7 +70,7 @@ public class AddressController {
 		JSONObject json = buildJsonObj(addrList);
 
 		try {
-			res.setCharacterEncoding("UTF-8");
+			res.setContentType("application/json;charset=UTF-8");
 			res.getWriter().write(json.toJSONString());
 		} catch (IOException e) {
 			e.printStackTrace();

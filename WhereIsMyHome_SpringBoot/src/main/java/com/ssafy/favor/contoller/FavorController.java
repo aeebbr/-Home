@@ -6,18 +6,22 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.ssafy.favor.dto.FavorDto;
 import com.ssafy.favor.service.FavorService;
 import com.ssafy.member.dto.MemberDto;
 
-@Controller
+@RestController
 @RequestMapping("/favor")
 public class FavorController {
 
@@ -29,43 +33,54 @@ public class FavorController {
 	}
 
 	@GetMapping("/delete")
-	private String delete(@RequestParam("id") String id, Model model) {
+	private ResponseEntity<?> delete(@RequestParam("id") String id, Model model) {
+		ModelAndView mav;
+
 		try {
 			favorService.deleteFavor(id);
+			return ResponseEntity.status(HttpStatus.ACCEPTED).build();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			model.addAttribute("msg", "회원 가입 처리중 에러 발생!!!");
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
-		return "redirect:/favor/list";
+
+//		return "redirect:/favor/list";
 	}
 
 	@GetMapping("/list")
-	private String list(HttpSession session, Model model) {
+	private ModelAndView list(HttpSession session, Model model) {
 		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
 		String userId = memberDto.getUserId();
+		ModelAndView mav;
+
 		try {
 			List<FavorDto> list = favorService.listFavor(userId);
 
 			model.addAttribute("regions", list);
 
-			return "favor/favorList";
+			mav = new ModelAndView("favor/favorList");
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.addAttribute("msg", "회원 가입 처리중 에러 발생!!!");
-			return "error/error";
+
+			mav = new ModelAndView("error/error");
 		}
+
+		return mav;
 	}
 
 	@GetMapping("/favor")
-	private String insert() {
-		return "favor/favor";
+	private ModelAndView insert() {
+		ModelAndView mav = new ModelAndView("favor/favor");
+		return mav;
 	}
 
 	@GetMapping("/insert")
-	private String insert(@RequestParam("sidoCode") String sidoCode, @RequestParam("gugunCode") String gugunCode,
-			@RequestParam("dongCode") String dongCode, @RequestParam("sidoName") String sidoName,
-			@RequestParam("gugunName") String gugunName, @RequestParam("dongName") String dongName, HttpSession session,
-			Model model) {
+	private ResponseEntity<?> insert(@RequestParam("sidoCode") String sidoCode,
+			@RequestParam("gugunCode") String gugunCode, @RequestParam("dongCode") String dongCode,
+			@RequestParam("sidoName") String sidoName, @RequestParam("gugunName") String gugunName,
+			@RequestParam("dongName") String dongName, HttpSession session, Model model) {
 		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
 
 		String userId = memberDto.getUserId();
@@ -85,11 +100,12 @@ public class FavorController {
 		try {
 			favorService.insertFavor(favorDto);
 
-			return "redirect:/favor/list";
+			return ResponseEntity.status(HttpStatus.ACCEPTED).build();
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.addAttribute("msg", "회원 가입 처리중 에러 발생!!!");
-			return "error/error";
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
+
 	}
 }

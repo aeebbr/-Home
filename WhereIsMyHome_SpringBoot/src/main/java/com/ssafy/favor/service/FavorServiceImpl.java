@@ -27,12 +27,6 @@ public class FavorServiceImpl implements FavorService {
 	public List<FavorDto> listFavor(String userId) throws SQLException {
 		List<FavorDto> list = favorMapper.listFavor(userId);
 		
-		for (FavorDto l: list) {
-			System.out.println(l.getId() + " "  + l.getSidoName() + " " + l.getGugunName() + " "+ l.getDongName());
-		}
-		
-		System.out.println("==========================");
-
 		for (int i = 0; i < list.size() - 1; i++) {
 			for (int j = i + 1; j < list.size(); j++) {
 				int compareSido = list.get(i).getSidoName().compareTo(list.get(j).getSidoName());
@@ -89,11 +83,6 @@ public class FavorServiceImpl implements FavorService {
 			}
 		}
 
-		
-		for (FavorDto l: list) {
-			System.out.println(l.getId() + " "  + l.getSidoName() + " " + l.getGugunName() + " "+ l.getDongName());
-		}
-		
 		return list;
 	}
 

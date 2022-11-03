@@ -42,43 +42,45 @@
 	<%@ include file="../common/header.jsp"%>
 
 	<main id="main">
-	<div class="breadcrumbs">
-		<div class="container">
-			<div class="region-container" id="region">
-				<div class="region-title-container">
-					<div class="region-title">관심 지역 등록</div>
-					<div class="region-sub-title">관심 지역을 등록하세요</div>
+		<div class="breadcrumbs">
+			<div class="container">
+				<div class="region-container" id="region">
+					<div class="region-title-container">
+						<div class="region-title">관심 지역 등록</div>
+						<div class="region-sub-title">관심 지역을 등록하세요</div>
+					</div>
+					<form method="post" action="/favor/insert">
+						<div class="row col-md-12 justify-content-center mb-2">
+							<div class="form-group col-md-2">
+								<select class="form-select bg-secondary text-light" id="sido"
+									name="sidoCode">
+									<option value="">도/광역시</option>
+								</select>
+							</div>
+							<div class="form-group col-md-2">
+								<select class="form-select bg-secondary text-light" id="gugun"
+									name="gugunCode">
+									<option value="">시/구/군</option>
+								</select>
+							</div>
+							<div class="form-group col-md-2">
+								<select class="form-select bg-secondary text-light" id="dong"
+									name="dongCode">
+									<option value="">동</option>
+								</select>
+							</div>
+						</div>
+						<div class="region-button-wrapper">
+							<button type="button" class="btn" id="btn-main"
+								onclick="handleClickAddRegion()">등록</button>
+						</div>
+					</form>
 				</div>
-				<form method="post" action="/favor/insert">
-					<div class="row col-md-12 justify-content-center mb-2">
-						<div class="form-group col-md-2">
-							<select class="form-select bg-secondary text-light" id="sido"
-								name="sidoCode">
-								<option value="">도/광역시</option>
-							</select>
-						</div>
-						<div class="form-group col-md-2">
-							<select class="form-select bg-secondary text-light" id="gugun"
-								name="gugunCode">
-								<option value="">시/구/군</option>
-							</select>
-						</div>
-						<div class="form-group col-md-2">
-							<select class="form-select bg-secondary text-light" id="dong"
-								name="dongCode">
-								<option value="">동</option>
-							</select>
-						</div>
-					</div>
-					<div class="region-button-wrapper">
-						<button type="button" class="btn" id="btn-main"
-							onclick="handleClickAddRegion()">등록</button>
-					</div>
-				</form>
 			</div>
 		</div>
-	</div>
 	</main>
+	<%@ include file="../common/footer.jsp"%>
+
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"

@@ -53,6 +53,28 @@ const handleClickloginCancle = () => {
   window.location.href = "/";
 };
 
+var infoModal = new bootstrap.Modal(document.getElementById("info-modal"), {
+  keyboard: true,
+  backdrop: true,
+});
+
+const handleClickInfo = () => {
+  if (!document.querySelector("#info-id").innerText) {
+    fetch(`user/info`)
+      .then((res) => res.json())
+      .then((data) => {
+        document.querySelector("#info-id").innerText = data.userId;
+        document.querySelector("#info-name").innerText = data.userName;
+        document.querySelector("#info-password").innerText = data.userPwd;
+        document.querySelector("#info-address").innerText = data.userAddr;
+        document.querySelector("#info-phone-number").innerText = data.userPhoneNum;
+
+        setModal();
+        // infoModal.show();
+      });
+  }
+};
+
 // 모달 세팅
 const setModal = () => {
   const infoNav = document.querySelector("#nav-info");
@@ -60,12 +82,15 @@ const setModal = () => {
   infoNav.setAttribute("data-bs-target", "#info-modal");
 
   infoNav.click();
+
+  //   infoNav.removeAttribute("data-bs-toggle");
+  //   infoNav.removeAttribute("data-bs-target");
 };
 
 // 회원 정보 클릭
 if (document.querySelector("#info-id")) {
   if (document.querySelector("#info-id").innerText) {
-    setModal();
+    // setModal();
   }
 }
 
@@ -188,7 +213,21 @@ const handleClickInfoModi = () => {
     //
     // location.reload();
 
-    document.querySelector("#form-modify").submit();
+    formData = new FormData();
+    formData.append("userid", id);
+    formData.append("userpwd", password);
+    formData.append("username", name);
+    formData.append("useraddr", address);
+    formData.append("userphonenumber", phoneNumber);
+
+    fetch(`/user/modify`, {
+      method: "POST",
+      body: formData,
+    }).then((res) => {
+      if (res.status === 202) {
+        location.href = "/user/info";
+      }
+    });
 
     // location.href = "/whereismyhome_be/user/modify";
   }

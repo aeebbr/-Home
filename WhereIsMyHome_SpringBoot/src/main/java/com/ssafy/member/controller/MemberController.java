@@ -29,6 +29,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.ssafy.member.dto.MemberDto;
 import com.ssafy.member.service.MemberService;
 
+import io.swagger.v3.oas.models.media.MediaType;
+
 @RestController
 @RequestMapping("/user")
 public class MemberController {
@@ -43,7 +45,7 @@ public class MemberController {
 	}
 
 	@GetMapping("/info")
-	private String info(RedirectAttributes redirectAtt, HttpSession session, Model model) {
+	private ResponseEntity<MemberDto> info(HttpSession session, Model model) {
 		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
 
 		String userId = memberDto.getUserId();
@@ -51,13 +53,19 @@ public class MemberController {
 		try {
 			memberDto = memberService.infoMember(userId);
 
-			redirectAtt.addFlashAttribute("member", memberDto);
 
-			return "redirect:/";
+//			Map<String, String> map = new HashMap<String, String>();
+//			map.put(", value)
+			
+//			return memberDto;
+			return new ResponseEntity<>(memberDto,HttpStatus.OK);
+//			return ResponseEntity.status(HttpStatus.ACCEPTED).build();
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.addAttribute("msg", "로그인 처리중 에러 발생!!!");
-			return "/error/error";
+//			return "/error/error";
+//			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+			return null;
 		}
 	}
 
@@ -77,16 +85,19 @@ public class MemberController {
 	}
 
 	@PostMapping("/modify")
-	private String modify(@RequestParam Map<String, String> map, MemberDto memberDto, Model model) {
+	private ResponseEntity<?> modify(@RequestParam Map<String, String> map, MemberDto memberDto, Model model) {
 		logger.debug("modify user : {}", map.get("name"));
 
 		try {
 			memberService.modifyMember(map);
-			return "redirect:/user/info";
+//			return "redirect:/user/info";
+			return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.addAttribute("msg", "회원 가입 처리중 에러 발생!!!");
-			return "/error/error";
+//			return "/error/error";
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
 	}
 
@@ -99,7 +110,7 @@ public class MemberController {
 		Map<String, String> map = new HashMap<>();
 		map.put("userid", req.getParameter("userid"));
 		map.put("userpwd", req.getParameter("userpwd"));
-		
+
 		try {
 			MemberDto memberDto = memberService.loginMember(map);
 			logger.debug("memberDto : {}", memberDto);
@@ -131,9 +142,9 @@ public class MemberController {
 	public ResponseEntity<?> logout(HttpSession session) {
 		try {
 			session.invalidate();
-			return ResponseEntity.status(HttpStatus.ACCEPTED).build();			
+			return ResponseEntity.status(HttpStatus.ACCEPTED).build();
 		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();			
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
 	}
 

@@ -85,9 +85,16 @@ public class MemberController {
 	}
 
 	@PostMapping("/modify")
-	private ResponseEntity<?> modify(@RequestParam Map<String, String> map, MemberDto memberDto, Model model) {
-		logger.debug("modify user : {}", map.get("name"));
-
+	private ResponseEntity<?> modify(MultipartHttpServletRequest req, Model model) {
+		logger.debug("modify user : {}", req.getParameter("username"));
+		
+		Map<String, String> map = new HashMap<>();
+		map.put("userid", req.getParameter("userid"));
+		map.put("userpwd", req.getParameter("userpwd"));
+		map.put("username", req.getParameter("username"));
+		map.put("userpwd", req.getParameter("useraddr"));
+		map.put("userphonenumber", req.getParameter("userphonenumber"));
+		
 		try {
 			memberService.modifyMember(map);
 //			return "redirect:/user/info";

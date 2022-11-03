@@ -59,19 +59,21 @@ var infoModal = new bootstrap.Modal(document.getElementById("info-modal"), {
 });
 
 const handleClickInfo = () => {
-  if (!document.querySelector("#info-id").innerText) {
-    fetch(`user/info`)
-      .then((res) => res.json())
-      .then((data) => {
-        document.querySelector("#info-id").innerText = data.userId;
-        document.querySelector("#info-name").innerText = data.userName;
-        document.querySelector("#info-password").innerText = data.userPwd;
-        document.querySelector("#info-address").innerText = data.userAddr;
-        document.querySelector("#info-phone-number").innerText = data.userPhoneNum;
+  if (document.querySelector("#info-id")) {
+    if (!document.querySelector("#info-id").innerText) {
+      fetch(`user/info`)
+        .then((res) => res.json())
+        .then((data) => {
+          document.querySelector("#info-id").innerText = data.userId;
+          document.querySelector("#info-name").innerText = data.userName;
+          document.querySelector("#info-password").innerText = data.userPwd;
+          document.querySelector("#info-address").innerText = data.userAddr;
+          document.querySelector("#info-phone-number").innerText = data.userPhoneNum;
 
-        setModal();
-        // infoModal.show();
-      });
+          setModal();
+          // infoModal.show();
+        });
+    }
   }
 };
 
@@ -82,9 +84,6 @@ const setModal = () => {
   infoNav.setAttribute("data-bs-target", "#info-modal");
 
   infoNav.click();
-
-  //   infoNav.removeAttribute("data-bs-toggle");
-  //   infoNav.removeAttribute("data-bs-target");
 };
 
 // 회원 정보 클릭
@@ -225,7 +224,9 @@ const handleClickInfoModi = () => {
       body: formData,
     }).then((res) => {
       if (res.status === 202) {
-        location.href = "/user/info";
+        // location.href = "/user/info";
+        // handleClickInfo();
+        setModal();
       }
     });
 

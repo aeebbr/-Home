@@ -8,10 +8,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,14 +32,12 @@ public class FavorController {
 
 	@GetMapping("/delete")
 	private ResponseEntity<?> delete(@RequestParam("id") String id, Model model) {
-		ModelAndView mav;
-
 		try {
 			favorService.deleteFavor(id);
 			return ResponseEntity.status(HttpStatus.ACCEPTED).build();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			model.addAttribute("msg", "회원 가입 처리중 에러 발생!!!");
+			model.addAttribute("msg", "관심지역 삭제 중 오류 발생");
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
 
@@ -49,22 +45,19 @@ public class FavorController {
 	}
 
 	@GetMapping("/list")
-	private ModelAndView list(HttpSession session, Model model) {
+	private ModelAndView list(HttpSession session) {
 		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
 		String userId = memberDto.getUserId();
-		ModelAndView mav;
+		ModelAndView mav = new ModelAndView();
 
 		try {
 			List<FavorDto> list = favorService.listFavor(userId);
-
-			model.addAttribute("regions", list);
-
-			mav = new ModelAndView("favor/favorList");
+			mav.addObject("regions", list);
+			mav.setViewName("favor/favorList");
 		} catch (Exception e) {
 			e.printStackTrace();
-			model.addAttribute("msg", "회원 가입 처리중 에러 발생!!!");
-
-			mav = new ModelAndView("error/error");
+			mav.addObject("msg", "관심지역 리스트 불러오기 중 오류 발생");
+			mav.setViewName("error/error");
 		}
 
 		return mav;
@@ -72,8 +65,7 @@ public class FavorController {
 
 	@GetMapping("/favor")
 	private ModelAndView insert() {
-		ModelAndView mav = new ModelAndView("favor/favor");
-		return mav;
+		return new ModelAndView("favor/favor");
 	}
 
 	@GetMapping("/insert")
@@ -103,7 +95,7 @@ public class FavorController {
 			return ResponseEntity.status(HttpStatus.ACCEPTED).build();
 		} catch (Exception e) {
 			e.printStackTrace();
-			model.addAttribute("msg", "회원 가입 처리중 에러 발생!!!");
+			model.addAttribute("msg", "관심지역 삽입 중 오류 발생");
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
 

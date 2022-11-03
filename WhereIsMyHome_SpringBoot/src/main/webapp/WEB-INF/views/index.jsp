@@ -43,110 +43,63 @@
 	<%@ include file="common/header.jsp"%>
 
 	<main id="main">
-	<div class="breadcrumbs">
-		<div class="container">
-			<!-- 배너 -->
-			<div class="banner-container">
-				<div class="banner-wrapper">
-					<div class="banner-title">
-						<div class="banner-top-title">Where Is My HOME?</div>
-						<h5>내 집은 어디에?</h5>
-						<h5>우리 집을 손쉽게 찾아보세요.</h5>
-					</div>
-					<div class="banner-button-wrapper">
-						<button>
-							<a href="#region"> 지역별로 집 보러 가기 </a>
-						</button>
+		<div class="breadcrumbs">
+			<div class="container">
+				<!-- 배너 -->
+				<div class="banner-container">
+					<div class="banner-wrapper">
+						<div class="banner-title">
+							<div class="banner-top-title">Where Is My HOME?</div>
+							<h5>내 집은 어디에?</h5>
+							<h5>우리 집을 손쉽게 찾아보세요.</h5>
+						</div>
+						<div class="banner-button-wrapper">
+							<button>
+								<a href="#region"> 지역별로 집 보러 가기 </a>
+							</button>
+						</div>
 					</div>
 				</div>
-			</div>
 
-			<!-- 메인 -->
-			<div class="region-container" id="region">
-				<div class="region-title-container">
-					<div class="region-title">지역별 아파트 검색</div>
-					<div class="region-sub-title">지역을 선택해서 시세를 알아보세요</div>
+				<!-- 메인 -->
+				<div class="region-container" id="region">
+					<div class="region-title-container">
+						<div class="region-title">지역별 아파트 검색</div>
+						<div class="region-sub-title">지역을 선택해서 시세를 알아보세요</div>
+					</div>
+					<form action="/apt/aptlist" method="get">
+						<div class="row col-md-12 justify-content-center mb-2">
+							<div class="form-group col-md-2">
+								<select class="form-select bg-secondary text-light" id="sido">
+								</select>
+							</div>
+							<div class="form-group col-md-2">
+								<select class="form-select bg-secondary text-light" id="gugun">
+									<option value="">시/구/군</option>
+								</select>
+							</div>
+							<div class="form-group col-md-2">
+								<select class="form-select bg-secondary text-light" id="dong">
+									<option value="">동</option>
+								</select>
+							</div>
+						</div>
+
+						<input type="hidden" name="sido" id="sidoValue" value="">
+						<input type="hidden" name="gugun" id="gugunValue" value="">
+						<input type="hidden" name="dong" id="dongValue" value="">
+
+						<div class="banner-button-wrapper" style="text-align: center">
+							<button type="submit" id="list-btn" class="btn btn-light"
+								style="margin-top: 20px">검색</button>
+						</div>
+					</form>
 				</div>
-				<form action="/apt/aptlist" method="get">
-					<div class="row col-md-12 justify-content-center mb-2">
-						<div class="form-group col-md-2">
-							<select class="form-select bg-secondary text-light" id="sido">
-							</select>
-						</div>
-						<div class="form-group col-md-2">
-							<select class="form-select bg-secondary text-light" id="gugun">
-								<option value="">시/구/군</option>
-							</select>
-						</div>
-						<div class="form-group col-md-2">
-							<select class="form-select bg-secondary text-light" id="dong">
-								<option value="">동</option>
-							</select>
-						</div>
-					</div>
-
-					<input type="hidden" name="sido" id="sidoValue" value=""> <input
-						type="hidden" name="gugun" id="gugunValue" value=""> <input
-						type="hidden" name="dong" id="dongValue" value="">
-
-					<div class="banner-button-wrapper" style="text-align: center">
-						<button type="submit" id="list-btn" class="btn btn-light"
-							style="margin-top: 20px">검색</button>
-					</div>
-				</form>
 			</div>
 		</div>
-	</div>
 	</main>
 
-	<footer id="footer" class="footer">
-		<div class="container">
-			<div class="row gy-3">
-				<div class="col-lg-3 col-md-9 d-flex">
-					<i class="bi bi-geo-alt icon"></i>
-					<div>
-						<h4>Address</h4>
-						<p>
-							(SSAFY) <br /> 서울시 강남구 테헤란로 멀티스퀘어<br />
-						</p>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-9 footer-links d-flex">
-					<i class="bi bi-telephone icon"></i>
-					<div>
-						<h4>Call</h4>
-						<p>
-							<strong>Phone:</strong> 1544-9001<br /> <strong>Email:</strong>
-							admin@ssafy.com<br />
-						</p>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-9 footer-links">
-					<h4>Follow Us</h4>
-					<div class="social-links d-flex">
-						<a href="#" class="twitter"><i class="bi bi-twitter"></i></a> <a
-							href="#" class="facebook"><i class="bi bi-facebook"></i></a> <a
-							href="#" class="instagram"><i class="bi bi-instagram"></i></a> <a
-							href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="container">
-			<div class="copyright">
-				&copy; Copyright <strong><span>구해줘 Home</span></strong>. All Rights
-				Reserved
-			</div>
-			<div class="credits">
-				<!-- All the links in the footer should remain intact. -->
-				<!-- You can delete the links only if you purchased the pro version. -->
-				<!-- Licensing information: https://bootstrapmade.com/license/ -->
-				<!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/yummy-bootstrap-restaurant-website-template/ -->
-				Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-			</div>
-		</div>
-	</footer>
+	<%@ include file="common/footer.jsp"%>
 
 	<!-- *** modal start -->
 	<!-- !!! 회원가입 modal -->
@@ -233,7 +186,8 @@
 					<button type="button" id="btn-sign-up"
 						class="btn-form-red btn btn-sm" onclick="handleClickSignup()">회원가입</button>
 					<button type="button" id="btn-sign-up-cancle"
-						class="btn-form-red btn-form-gray btn btn-sm" onclick="handleClickSignupCancle()">취소</button>
+						class="btn-form-red btn-form-gray btn btn-sm"
+						onclick="handleClickSignupCancle()">취소</button>
 				</div>
 			</div>
 		</div>
@@ -291,8 +245,8 @@
 						class="btn-form-red-border btn btn-sm"
 						onclick="alert('coming soon')">비밀번호 찾기</button>
 					<button type="button" id="btn-login-cancle"
-						class="btn-form-red btn-form-gray btn btn-sm" onclick="handleClickloginCancle()">
-						취소</button>
+						class="btn-form-red btn-form-gray btn btn-sm"
+						onclick="handleClickloginCancle()">취소</button>
 				</div>
 			</div>
 		</div>

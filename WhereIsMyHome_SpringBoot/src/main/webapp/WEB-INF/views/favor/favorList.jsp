@@ -42,41 +42,43 @@
 	<%@ include file="../common/header.jsp"%>
 
 	<main id="main">
-	<div class="breadcrumbs">
-		<div class="container">
-			<div class="page-title-container">
-				<div class="page-title">관심 지역 목록</div>
-			</div>
-			<div class="favor-list-container">
-				<!-- 등록된 지역이 없다면  -->
-				<c:if test="${empty regions}">
-					<div class="nothing-container">
-						<div class="nothing-title">등록된 관심 지역이 없습니다</div>
-						<div class="insert-banner-container"
-							onclick="location.href=`/favor/favor`">
-							<div class="insert-banner-title">관심 지역 등록하러 가기</div>
+		<div class="breadcrumbs">
+			<div class="container">
+				<div class="page-title-container">
+					<div class="page-title">관심 지역 목록</div>
+				</div>
+				<div class="favor-list-container">
+					<!-- 등록된 지역이 없다면  -->
+					<c:if test="${empty regions}">
+						<div class="nothing-container">
+							<div class="nothing-title">등록된 관심 지역이 없습니다</div>
+							<div class="insert-banner-container"
+								onclick="location.href=`/favor/favor`">
+								<div class="insert-banner-title">관심 지역 등록하러 가기</div>
+							</div>
 						</div>
-					</div>
-				</c:if>
-				<!-- for each start -->
-				<c:forEach var="region" items="${regions}">
-					<div class="favor-list-wrapper">
-						<div class="favor-list-region">
-							<div class="favor-list-sido">${region.sidoName }</div>
-							<div class="favor-list-gugun">${region.gugunName }</div>
-							<div class="favor-list-dong">${region.dongName }</div>
+					</c:if>
+					<!-- for each start -->
+					<c:forEach var="region" items="${regions}">
+						<div class="favor-list-wrapper">
+							<div class="favor-list-region">
+								<div class="favor-list-sido">${region.sidoName }</div>
+								<div class="favor-list-gugun">${region.gugunName }</div>
+								<div class="favor-list-dong">${region.dongName }</div>
+							</div>
+							<div class="favor-list-btn-container">
+								<div id="${region.id }"
+									class="favor-list-btn-wrapper favor-list-btn-del">삭제</div>
+							</div>
 						</div>
-						<div class="favor-list-btn-container">
-							<div id="${region.id }"
-								class="favor-list-btn-wrapper favor-list-btn-del">삭제</div>
-						</div>
-					</div>
-				</c:forEach>
-				<!-- for each end -->
+					</c:forEach>
+					<!-- for each end -->
+				</div>
 			</div>
 		</div>
-	</div>
 	</main>
+	<%@ include file="../common/footer.jsp"%>
+
 	<script src="/assets/js/favorList.js"></script>
 	<script src="/assets/js/logout.js"></script>
 	<script src="/assets/js/nav.js"></script>

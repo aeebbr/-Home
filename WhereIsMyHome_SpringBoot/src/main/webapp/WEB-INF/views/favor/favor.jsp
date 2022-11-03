@@ -49,8 +49,7 @@
 					<div class="region-title">관심 지역 등록</div>
 					<div class="region-sub-title">관심 지역을 등록하세요</div>
 				</div>
-				<form method="post" action="${root }/favor">
-					<input type="hidden" name="act" value="insert">
+				<form method="post" action="/favor/insert">
 					<div class="row col-md-12 justify-content-center mb-2">
 						<div class="form-group col-md-2">
 							<select class="form-select bg-secondary text-light" id="sido"
@@ -84,9 +83,9 @@
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 		crossorigin="anonymous"></script>
-	<script src="../js/favor.js"></script>
-	<script src="../js/logout.js"></script>
-	<script src="../js/nav.js"></script>
-	<script src="../js/main.js"></script>
+	<script src="/assets/js/favor.js"></script>
+	<script src="/assets/js/logout.js"></script>
+	<script src="/assets/js/nav.js"></script>
+	<script src="/assets/js/main.js"></script>
 </body>
 </html>

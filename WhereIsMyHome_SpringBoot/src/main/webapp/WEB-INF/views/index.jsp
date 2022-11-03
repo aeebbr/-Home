@@ -67,7 +67,7 @@
 					<div class="region-title">지역별 아파트 검색</div>
 					<div class="region-sub-title">지역을 선택해서 시세를 알아보세요</div>
 				</div>
-				<form action="apt" method="get">
+				<form action="/apt/aptlist" method="get">
 					<div class="row col-md-12 justify-content-center mb-2">
 						<div class="form-group col-md-2">
 							<select class="form-select bg-secondary text-light" id="sido">

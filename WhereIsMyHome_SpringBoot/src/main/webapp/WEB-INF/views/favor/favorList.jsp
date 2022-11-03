@@ -53,7 +53,7 @@
 					<div class="nothing-container">
 						<div class="nothing-title">등록된 관심 지역이 없습니다</div>
 						<div class="insert-banner-container"
-							onclick="location.href=`${root }/favor/insert`">
+							onclick="location.href=`/favor/favor`">
 							<div class="insert-banner-title">관심 지역 등록하러 가기</div>
 						</div>
 					</div>
@@ -77,8 +77,8 @@
 		</div>
 	</div>
 	</main>
-	<script src="/whereismyhome_be/assets/js/favorList.js"></script>
-	<script src="/whereismyhome_be/assets/js/logout.js"></script>
-	<script src="/whereismyhome_be/assets/js/nav.js"></script>
+	<script src="/assets/js/favorList.js"></script>
+	<script src="/assets/js/logout.js"></script>
+	<script src="/assets/js/nav.js"></script>
 </body>
 </html>

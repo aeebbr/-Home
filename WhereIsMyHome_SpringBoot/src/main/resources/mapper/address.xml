@@ -8,12 +8,12 @@
 		<result column="sidoName" property="name" />
 		<result column="sidoCode" property="code" />
 	</resultMap>
-	
+
 	<resultMap type="AddressDto" id="gugun">
 		<result column="gugunName" property="name" />
 		<result column="gugunCode" property="code" />
 	</resultMap>
-	
+
 	<resultMap type="AddressDto" id="dong">
 		<result column="dongName" property="name" />
 		<result column="dongCode" property="code" />
@@ -29,17 +29,16 @@
 
 	<select id="getGugunList" parameterType="string"
 		resultMap="gugun">
-		select gugunName, substring(dongCode, 1, 5) as "gugunCode" from dongCode
-		where dongCode
-		like '" + #{sidoCode} + "%' and dongName is null and
-		gugunName is not
-		null
+		select gugunName, substring(dongCode, 1, 5) as "gugunCode" from
+		dongCode
+		where dongCode like #{sidoCode} '%' and dongName is null and
+		gugunName
+		is not null
 	</select>
 
-	<select id="getDongList" parameterType="string"
-		resultMap="dong">
-		"select dongName, dongCode from dongCode where dongCode like '" + #{gugunCode} +
-		"%' and dongName is not null
+	<select id="getDongList" parameterType="string" resultMap="dong">
+		select dongName, dongCode from dongCode where dongCode like
+		#{gugunCode} '%' and dongName is not null
 	</select>
 
 </mapper>

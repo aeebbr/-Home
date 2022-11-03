@@ -36,7 +36,7 @@ public class FavorController {
 			e.printStackTrace();
 			model.addAttribute("msg", "회원 가입 처리중 에러 발생!!!");
 		}
-		return "favor/list";
+		return "redirect:/favor/list";
 	}
 
 	@GetMapping("/list")
@@ -56,12 +56,12 @@ public class FavorController {
 		}
 	}
 
-	@GetMapping("/insert")
+	@GetMapping("/favor")
 	private String insert() {
 		return "favor/favor";
 	}
 
-	@PostMapping("/insert")
+	@GetMapping("/insert")
 	private String insert(@RequestParam("sidoCode") String sidoCode, @RequestParam("gugunCode") String gugunCode,
 			@RequestParam("dongCode") String dongCode, @RequestParam("sidoName") String sidoName,
 			@RequestParam("gugunName") String gugunName, @RequestParam("dongName") String dongName, HttpSession session,
@@ -84,6 +84,7 @@ public class FavorController {
 
 		try {
 			favorService.insertFavor(favorDto);
+
 			return "redirect:/favor/list";
 		} catch (Exception e) {
 			e.printStackTrace();

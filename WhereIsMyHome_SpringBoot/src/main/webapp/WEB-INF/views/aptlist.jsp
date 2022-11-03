@@ -55,96 +55,97 @@
 <body>
 	<%@ include file="common/header.jsp"%>
 
-	<main id="main"> <!-- ======= About Section ======= -->
-	<div class="breadcrumbs">
-		<div class="container">
-			<div class="banner-container">
-				<div class="banner-wrapper">
-					<div class="banner-title">
-						<h1 style="color: white; text-align: center">지역별 아파트 검색</h1>
-						<h5 style="color: white; text-align: center; margin-top: 20px">
-							지역을 선택해서 시세를 알아보세요</h5>
+	<main id="main">
+		<!-- ======= About Section ======= -->
+		<div class="breadcrumbs">
+			<div class="container">
+				<div class="banner-container">
+					<div class="banner-wrapper">
+						<div class="banner-title">
+							<h1 style="color: white; text-align: center">지역별 아파트 검색</h1>
+							<h5 style="color: white; text-align: center; margin-top: 20px">
+								지역을 선택해서 시세를 알아보세요</h5>
+						</div>
+						<form action="/apt/aptlist" method="get">
+							<div class="row col-md-12 justify-content-center mb-2">
+								<div class="form-group col-md-2">
+									<select class="form-select bg-secondary text-light" id="sido">
+									</select>
+								</div>
+								<div class="form-group col-md-2">
+									<select class="form-select bg-secondary text-light" id="gugun">
+										<option value="">시/구/군</option>
+									</select>
+								</div>
+								<div class="form-group col-md-2">
+									<select class="form-select bg-secondary text-light" id="dong">
+										<option value="">동</option>
+									</select>
+								</div>
+							</div>
+
+							<input type="hidden" name="sido" id="sidoValue" value="">
+							<input type="hidden" name="gugun" id="gugunValue" value="">
+							<input type="hidden" name="dong" id="dongValue" value="">
+
+							<div class="banner-button-wrapper" style="text-align: center">
+								<button type="submit" id="list-btn" class="btn btn-light"
+									style="margin-top: 20px">검색</button>
+							</div>
+						</form>
 					</div>
-					<form action="apt" method="get">
-						<input type="hidden" name="action" value="aptlist">
-						<div class="row col-md-12 justify-content-center mb-2">
-							<div class="form-group col-md-2">
-								<select class="form-select bg-secondary text-light" id="sido">
-								</select>
-							</div>
-							<div class="form-group col-md-2">
-								<select class="form-select bg-secondary text-light" id="gugun">
-									<option value="">시/구/군</option>
-								</select>
-							</div>
-							<div class="form-group col-md-2">
-								<select class="form-select bg-secondary text-light" id="dong">
-									<option value="">동</option>
-								</select>
-							</div>
-						</div>
-
-						<input type="hidden" name="sido" id="sidoValue" value="">
-						<input type="hidden" name="gugun" id="gugunValue" value="">
-						<input type="hidden" name="dong" id="dongValue" value="">
-
-						<div class="banner-button-wrapper" style="text-align: center">
-							<button type="submit" id="list-btn" class="btn btn-light"
-								style="margin-top: 20px">검색</button>
-						</div>
-					</form>
 				</div>
-			</div>
 
-			<c:if test="${not empty aptList}">
-				<div style="height: 70px"></div>
-				<div id="map" style="width: 100%; height: 400px;"></div>
-				<!-- //////////////////////////////  맵 start  ///////////////////////////////////// -->
-				<script type="text/javascript"
-					src="//dapi.kakao.com/v2/maps/sdk.js?appkey=32b7b36540e75a778fb8400e8a821a41&libraries=services"></script>
-				<!-- //////////////////////////////  맵 end  ///////////////////////////////////// -->
-			</c:if>
+				<c:if test="${not empty aptList}">
+					<div style="height: 70px"></div>
+					<div id="map" style="width: 100%; height: 400px;"></div>
+					<!-- //////////////////////////////  맵 start  ///////////////////////////////////// -->
+					<script type="text/javascript"
+						src="//dapi.kakao.com/v2/maps/sdk.js?appkey=32b7b36540e75a778fb8400e8a821a41&libraries=services"></script>
+					<!-- //////////////////////////////  맵 end  ///////////////////////////////////// -->
+				</c:if>
 
-			<c:if test="${empty aptList}">
-			<div style="text-align: center;">
-			<br>
-				<h3>해당하는 지역의 아파트 매물이 없습니다.</h3>
-				</div>
-			</c:if>
-			<c:if test="${not empty aptList}">
-				<table class="table table-hover text-center">
-					<tr>
-						<th>아파트이름</th>
-						<th>층</th>
-						<th>면적</th>
-						<th>법정동</th>
-						<th>거래금액</th>
-					</tr>
-					<!-- //////////////////////////////  apt list start  ///////////////////////////////////// -->
-					<tbody id=aptTable>
-						<%
-							for (AptDto apt : aptList) {
-									Gson gson = new Gson();
-									String aptJson = gson.toJson(apt);
-						%>
-						<tr id="aptInfo" onclick='selectDetailApt(<%=aptJson%>)'>
-							<td><%=apt.getAptName()%></td>
-							<td><%=apt.getFloor()%></td>
-							<td><%=apt.getArea()%></td>
-							<td><%=apt.getDongName()%></td>
-							<td><%=apt.getDealAmount()%></td>
+				<c:if test="${empty aptList}">
+					<div style="text-align: center;">
+						<br>
+						<h3>해당하는 지역의 아파트 매물이 없습니다.</h3>
+					</div>
+				</c:if>
+				<c:if test="${not empty aptList}">
+					<table class="table table-hover text-center">
+						<tr>
+							<th>아파트이름</th>
+							<th>층</th>
+							<th>면적</th>
+							<th>법정동</th>
+							<th>거래금액</th>
 						</tr>
-						<%
-							}
-						%>
-					</tbody>
-				</table>
-			</c:if>
-			<!-- //////////////////////////////  apt list end  ///////////////////////////////////// -->
+						<!-- //////////////////////////////  apt list start  ///////////////////////////////////// -->
+						<tbody id=aptTable>
+							<%
+								for (AptDto apt : aptList) {
+								Gson gson = new Gson();
+								String aptJson = gson.toJson(apt);
+							%>
+							<tr id="aptInfo" onclick='selectDetailApt(<%=aptJson%>)'>
+								<td><%=apt.getAptName()%></td>
+								<td><%=apt.getFloor()%></td>
+								<td><%=apt.getArea()%></td>
+								<td><%=apt.getDongName()%></td>
+								<td><%=apt.getDealAmount()%></td>
+							</tr>
+							<%
+								}
+							%>
+						</tbody>
+					</table>
+				</c:if>
+				<!-- //////////////////////////////  apt list end  ///////////////////////////////////// -->
 
+			</div>
 		</div>
-	</div>
-	<!-- End Contact Section --> </main>
+		<!-- End Contact Section -->
+	</main>
 	<!-- End #main -->
 
 	<!-- ======= Footer ======= -->

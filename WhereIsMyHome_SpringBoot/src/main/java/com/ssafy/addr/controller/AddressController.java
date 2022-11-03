@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,9 +22,9 @@ import com.ssafy.addr.service.IAddressService;
 public class AddressController {
 
 	private IAddressService addrService;
-	
+
 	private List<AddressDto> addrList;
-	
+
 	@Autowired
 	public AddressController(IAddressService addrService) {
 		this.addrService = addrService;
@@ -40,6 +41,7 @@ public class AddressController {
 			e.printStackTrace();
 		}
 	}
+
 	@GetMapping("/gugun")
 	private void getGugunList(@RequestParam("sido") String sidoCode, HttpServletResponse res) {
 		addrList = addrService.getGugunList(sidoCode);
@@ -51,12 +53,17 @@ public class AddressController {
 			e.printStackTrace();
 		}
 	}
+
+//	@RequestMapping(value = "/sido", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
 	@GetMapping("/sido")
 	private void getSidoList(HttpServletResponse res) {
+		res.setContentType("text/html");
+        res.setCharacterEncoding("utf-8");
+
 		addrList = addrService.getSidoList();
 
 		JSONObject json = buildJsonObj(addrList);
-		
+
 		System.out.println(json.toJSONString());
 		try {
 			res.getWriter().write(json.toJSONString());

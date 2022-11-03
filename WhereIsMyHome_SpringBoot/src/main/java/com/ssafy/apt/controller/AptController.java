@@ -8,11 +8,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.ssafy.apt.dto.AptDto;
 import com.ssafy.apt.service.AptServiceImpl;
 
-@Controller
+@RestController
 @RequestMapping("/apt")
 public class AptController {
 
@@ -24,12 +26,13 @@ public class AptController {
 	}
 
 	@GetMapping("/aptlist")
-	private String selectAptList(@RequestParam("sido") String sido, @RequestParam("gugun") String gugun,
-			@RequestParam("dong") String dong, String url, Model model) {
-
+	private ModelAndView selectAptList(@RequestParam("sido") String sido, @RequestParam("gugun") String gugun,
+			@RequestParam("dong") String dong) {
+		ModelAndView mav = new ModelAndView();
 		List<AptDto> aptList = aptService.selectAptList(sido, gugun, dong);
-		model.addAttribute("aptList", aptList);
+		mav.addObject("aptList", aptList);
+		mav.setViewName("aptlist");
 
-		return "aptlist";
+		return mav;
 	}
 }

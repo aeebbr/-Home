@@ -56,7 +56,7 @@
 				</nav>
 				<div id="nav-right-container">
 					<a class="btn-book-a-table nav-link" id="nav-info"
-						href="/user/info">회원정보</a>
+					onclick="handleClickInfo()" href="#">회원정보</a>
 					<a class="btn-gray btn-book-a-table nav-link" id="nav-logout"
 						onclick="handleClickLogout()" href="#">로그아웃</a>
 				</div>

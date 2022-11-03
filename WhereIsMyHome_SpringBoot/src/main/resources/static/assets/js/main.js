@@ -1,6 +1,12 @@
-fetch("/addr/sido")
+fetch("/addr/sido", {
+	method: 'GET',
+  headers: {
+    'Content-Type': 'application/json;charset=utf-8'
+  }
+})
 .then(response => response.json())
 .then(data => {
+	console.log(data);
     let sidoSel = document.querySelector("#sido");
     let init = document.createElement("option");
     init.textContent = "도/광역시";
@@ -10,6 +16,8 @@ fetch("/addr/sido")
         let option = document.createElement("option");
         option.textContent = sido.name;
         option.value = sido.code;
+        
+        console.log(sido.name);
         
         sidoSel.appendChild(option);
     })

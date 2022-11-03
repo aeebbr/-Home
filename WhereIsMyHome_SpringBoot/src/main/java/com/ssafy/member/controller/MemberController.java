@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ssafy.member.dto.MemberDto;
 import com.ssafy.member.service.MemberService;
@@ -37,20 +38,21 @@ public class MemberController {
 	}
 
 	@GetMapping("/info")
-	private String info(HttpSession session, Model model) {
+	private String info(RedirectAttributes redirectAtt, HttpSession session, Model model) {
 		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
 
 		String userId = memberDto.getUserId();
 
 		try {
 			memberDto = memberService.infoMember(userId);
-			model.addAttribute("member", memberDto);
 
-			return "/index.jsp";
+			redirectAtt.addFlashAttribute("member", memberDto);
+
+			return "redirect:/";
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.addAttribute("msg", "로그인 처리중 에러 발생!!!");
-			return "/error/error.jsp";
+			return "/error/error";
 		}
 	}
 
@@ -61,44 +63,30 @@ public class MemberController {
 		try {
 			memberService.deleteMember(memberDto.getUserId());
 			logout(session);
-			return "/user/login";
+			return "redirect:/";
 		} catch (SQLException e) {
 			e.printStackTrace();
 			model.addAttribute("msg", "회원 탈퇴 처리중 에러 발생!!!");
-			return "/error/error.jsp";
+			return "/error/error";
 		}
 	}
 
 	@PostMapping("/modify")
 	private String modify(@RequestParam Map<String, String> map, MemberDto memberDto, Model model) {
-//		String id = request.getParameter("id");
-//		String pw = request.getParameter("pw");
-//		String name = request.getParameter("name");
-//		String addr = request.getParameter("addr");
-//		String pNum = request.getParameter("pNumber");
-
-//		MemberDto memberDto = new MemberDto();
-
-//		memberDto.setUserId(id);
-//		memberDto.setUserPwd(pw);
-//		memberDto.setUserName(name);
-//		memberDto.setUserAddr(addr);
-//		memberDto.setUserPhoneNum(pNum);
-
-		logger.debug("modify user : {}", map.get("id"));
+		logger.debug("modify user : {}", map.get("name"));
 
 		try {
-			memberService.modifyMember(memberDto);
-			return "/user/info";
+			memberService.modifyMember(map);
+			return "redirect:/user/info";
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.addAttribute("msg", "회원 가입 처리중 에러 발생!!!");
-			return "/error/error.jsp";
+			return "/error/error";
 		}
 	}
 
 	@PostMapping("/login")
-	public String login(@RequestParam Map<String, String> map, Model model, HttpSession session,
+	public String login(@RequestParam Map<String, String> map, RedirectAttributes redirectAtt, Model model, HttpSession session,
 			HttpServletResponse response) {
 
 		logger.debug("map : {}", map.get("userid"));
@@ -118,13 +106,13 @@ public class MemberController {
 
 				return "redirect:/";
 			} else {
-				model.addAttribute("msg", "아이디 또는 비밀번호 확인 후 다시 로그인하세요!");
-				return "index";
+				redirectAtt.addFlashAttribute("msg", "아이디 또는 비밀번호 확인 후 다시 로그인하세요!");
+				return "redirect:/";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.addAttribute("msg", "로그인 중 문제 발생!!!");
-			return "/error/error.jsp";
+			return "/error/error";
 		}
 	}
 
@@ -134,22 +122,17 @@ public class MemberController {
 		return "redirect:/";
 	}
 
-	@GetMapping("/join")
-	public String join() {
-		return "user/join";
-	}
-
 	@PostMapping("/join")
-	private String join(MemberDto memberDto, Model model) {
-		logger.debug("member info: {}", memberDto);
+	private String join(@RequestParam Map<String, String> map, MemberDto memberDto, Model model) {
+		logger.debug("member info: {}", map.get("userid"));
 
 		try {
-			memberService.joinMember(memberDto);
-			return "redirect:index";
+			memberService.joinMember(map);
+			return "redirect:/";
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.addAttribute("msg", "회원 가입 처리중 에러 발생!!!");
-			return "/error/error.jsp";
+			return "/error/error";
 		}
 	}
 

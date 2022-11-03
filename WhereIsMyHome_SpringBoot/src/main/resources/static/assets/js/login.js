@@ -19,7 +19,7 @@ const handleClickLogin = () => {
 	}
 };
 
-//const loginFailed = document.querySelector('.login-failed').innerText;
+const loginFailed = document.querySelector('.login-failed').innerText;
 
 const openLogin = () => {
 	const loginNav = document.querySelector('#nav-login');
@@ -28,9 +28,9 @@ const openLogin = () => {
 }
 
 // 로그인 실패 문구가 존재한다면 모달 open
-//if(loginFailed !== "") {
-//	openLogin();
-//}
+if(loginFailed !== "") {
+	openLogin();
+}
 
 // 로그인 모달 닫기
 const handleClickloginCancle = () => {
@@ -41,7 +41,7 @@ const handleClickloginCancle = () => {
 	idValidEl.innerText = '';
 	passwordValidEl.innerText = '';
 // loginFailed.innerText = '';
-	window.location.href ="/whereismyhome_be/index.jsp";	
+	window.location.href ="/";	
 };
 
 // 모달 세팅
@@ -64,7 +64,7 @@ if(document.querySelector('#info-id')) {
 // 회원 정보 모달 닫기
 const handleClickInfoClose = () => {
 	document.querySelector('#btn-close-info').click();
-	window.location.href ="/whereismyhome_be/index.jsp";	
+	window.location.href ="/";	
 };
 
 // 회원 정보 수정
@@ -205,6 +205,6 @@ const handleClickInfoModi = () => {
 // 회원 탈퇴 클릭
 const handleClickDel = () => {
 	if (window.confirm('탈퇴하시겠습니까?')) {
-		window.location.href = "/whereismyhome_be/user/delete";
+		window.location.href = "/user/delete";
 	}
 };

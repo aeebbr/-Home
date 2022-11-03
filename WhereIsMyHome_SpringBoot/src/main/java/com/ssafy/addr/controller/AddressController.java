@@ -32,6 +32,9 @@ public class AddressController {
 
 	@GetMapping("/dong")
 	private void getDongList(@RequestParam("gugun") String gugunCode, HttpServletResponse res) {
+		res.setContentType("text/html");
+        res.setCharacterEncoding("utf-8");
+        
 		addrList = addrService.getDongList(gugunCode);
 
 		JSONObject json = buildJsonObj(addrList);
@@ -44,6 +47,9 @@ public class AddressController {
 
 	@GetMapping("/gugun")
 	private void getGugunList(@RequestParam("sido") String sidoCode, HttpServletResponse res) {
+		res.setContentType("text/html");
+        res.setCharacterEncoding("utf-8");
+        
 		addrList = addrService.getGugunList(sidoCode);
 
 		JSONObject json = buildJsonObj(addrList);
@@ -54,7 +60,6 @@ public class AddressController {
 		}
 	}
 
-//	@RequestMapping(value = "/sido", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
 	@GetMapping("/sido")
 	private void getSidoList(HttpServletResponse res) {
 		res.setContentType("text/html");
@@ -64,7 +69,6 @@ public class AddressController {
 
 		JSONObject json = buildJsonObj(addrList);
 
-		System.out.println(json.toJSONString());
 		try {
 			res.getWriter().write(json.toJSONString());
 		} catch (IOException e) {

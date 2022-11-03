@@ -15,7 +15,7 @@ import com.ssafy.apt.service.AptServiceImpl;
 @Controller
 @RequestMapping("/apt")
 public class AptController {
-	
+
 	private AptServiceImpl aptService;
 
 	@Autowired
@@ -26,10 +26,12 @@ public class AptController {
 	@GetMapping("/aptlist")
 	private String selectAptList(@RequestParam("sido") String sido, @RequestParam("gugun") String gugun,
 			@RequestParam("dong") String dong, String url, Model model) {
-		
+
+		System.out.println("asfasfsdfsdf");
+
 		List<AptDto> aptList = aptService.selectAptList(sido, gugun, dong);
 		model.addAttribute("aptList", aptList);
-		
+
 		return "aptlist";
 	}
 }

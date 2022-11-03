@@ -42,8 +42,8 @@
 <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
 
 <!-- Template Main CSS File -->
-<link href="assets/css/main.css" rel="stylesheet" />
-<link rel="stylesheet" href="assets/css/mainCustom.css" />
+<link href="/assets/css/main.css" rel="stylesheet" />
+<link rel="stylesheet" href="/assets/css/mainCustom.css" />
 <!-- =======================================================
   * Template Name: Yummy - v1.1.0
   * Template URL: https://bootstrapmade.com/yummy-bootstrap-restaurant-website-template/
@@ -425,11 +425,11 @@
 		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 		crossorigin="anonymous"></script>
 
-	<script src="./assets/js/nav.js"></script>
-	<script src="./assets/js/signUp.js"></script>
-	<script src="./assets/js/login.js"></script>
-	<script src="./assets/js/logout.js"></script>
-	<script src="./assets/js/main.js"></script>
+	<script src="/assets/js/nav.js"></script>
+	<script src="/assets/js/signUp.js"></script>
+	<script src="/assets/js/login.js"></script>
+	<script src="/assets/js/logout.js"></script>
+	<script src="/assets/js/main.js"></script>
 
 	<script type="text/javascript">
 		window.onload = function() {

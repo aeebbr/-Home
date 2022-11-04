@@ -267,51 +267,64 @@
 
 				<!-- Modal body -->
 				<div id="info-container">
-					<div class="modal-body">
-						<form action="">
-							<div class="row">
-								<div class="input-wrapper row mb-3">
-									<div class="col-md-3">아이디</div>
-									<div class="col-md-9 info" id="info-id">${member.userId}</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="input-wrapper row mb-3">
-									<div class="col-md-3">비밀번호</div>
-									<div class="col-md-9 info" id="info-password">${member.userPwd }</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="input-wrapper row mb-3">
-									<div class="col-md-3">이름</div>
-									<div class="col-md-9 info" id="info-name">${member.userName}</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="input-wrapper row mb-3">
-									<div class="col-md-3">주소</div>
-									<div class="col-md-9 info" id="info-address">${member.userAddr}</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="input-wrapper row mb-3">
-									<div class="col-md-3">전화번호</div>
-									<div class="col-md-9 info" id="info-phone-number">${member.userPhoneNum}</div>
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
+                    <div class="modal-body">
+                        <form action="">
+                            <div class="row">
+                                <div class="input-wrapper row mb-3">
+                                    <div class="col-md-3">아이디</div>
+                                    <div class="col-md-9 info-input" id="info-id"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-wrapper row mb-3">
+                                    <div class="col-md-3">비밀번호</div>
+                                    <div class="col-md-9 info" id="info-password" style="display: display;"></div>
+                                    <input type="password" class="col-md-9 info-input form-control" style="display: none;" id="password-modi"></input>
+									<div class="input-valid" id="password-info-valid"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-wrapper row mb-3">
+                                    <div class="col-md-3">이름</div>
+                                    <div class="col-md-9 info" id="info-name" style="display: display;"></div>
+                                    <input type="text" class="col-md-9 info-input form-control" style="display: none;" id="name-modi"></input>
+									<div class="input-valid" id="name-info-valid"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-wrapper row mb-3">
+                                    <div class="col-md-3">주소</div>
+                                    <div class="col-md-9 info" id="info-address" style="display: display;"></div>
+                                    <input type="text" class="col-md-9 info-input form-control" style="display: none;" id="address-modi"></input>
+									<div class="input-valid" id="address-info-valid"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-wrapper row mb-3">
+                                    <div class="col-md-3">전화번호</div>
+                                    <div class="col-md-9 info" id="info-phone-number" style="display: display;"></div>
+                                    <input type="tel" class="col-md-9 info-input form-control" style="display: none;" id="phone-number-modi"></input>
+									<div class="input-valid" id="phone-number-info-valid"></div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
 
 				<!-- Modal footer -->
 				<div class="info-button-container modal-body">
 					<button type="button" id="btn-info-modi"
-						class="btn-form-red btn btn-sm" onclick="handleClickOpenModi()">수정</button>
+						class="btn-form-red btn btn-sm" onclick="handleClickOpenModi()" style="display: display;">수정</button>
+
+					<button type="button" id="btn-info-modi-confirm" class="btn-form-red btn btn-sm" onclick="handleClickInfoModi()" style="display: none">저장</button>
+
 					<button type="button" id="btn-info-del"
-						class="btn-form-red-border btn btn-sm" onclick="handleClickDel()">탈퇴</button>
+						class="btn-form-red-border btn btn-sm" onclick="handleClickDel()" style="display: display;">탈퇴</button>
+
+					<button type="button" id="btn-sign-up-cancle" class="btn-form-red btn-form-gray btn btn-sm" onclick="handleClickInfoClose()" style="display: none">취소</button>
 					<button type="button" id="btn-info-check"
 						class="btn-form-red btn-form-gray btn btn-sm"
-						onclick="handleClickInfoClose()">닫기</button>
+						onclick="handleClickInfoClose()" style="display: display;">닫기</button>
 				</div>
 			</div>
 		</div>

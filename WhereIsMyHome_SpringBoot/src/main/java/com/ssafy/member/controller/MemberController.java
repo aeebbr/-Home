@@ -52,8 +52,7 @@ public class MemberController {
 
 		try {
 			memberDto = memberService.infoMember(userId);
-
-
+			
 //			Map<String, String> map = new HashMap<String, String>();
 //			map.put(", value)
 			
@@ -88,22 +87,28 @@ public class MemberController {
 	private ResponseEntity<?> modify(MultipartHttpServletRequest req, Model model) {
 		logger.debug("modify user : {}", req.getParameter("username"));
 		
+		MemberDto memberDto = new MemberDto();
+		
 		Map<String, String> map = new HashMap<>();
 		map.put("userid", req.getParameter("userid"));
 		map.put("userpwd", req.getParameter("userpwd"));
 		map.put("username", req.getParameter("username"));
-		map.put("userpwd", req.getParameter("useraddr"));
+		map.put("useraddr", req.getParameter("useraddr"));
 		map.put("userphonenumber", req.getParameter("userphonenumber"));
+		
+		System.out.println(req.getParameter("userid"));
+		
 		
 		try {
 			memberService.modifyMember(map);
-//			return "redirect:/user/info";
-			return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+			
+			System.out.println();
+			return new ResponseEntity<Map<String, String>>(map,HttpStatus.OK);
 
 		} catch (Exception e) {
+			System.out.println("실패!!!!!!!!!!!");
 			e.printStackTrace();
 			model.addAttribute("msg", "회원 가입 처리중 에러 발생!!!");
-//			return "/error/error";
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
 	}

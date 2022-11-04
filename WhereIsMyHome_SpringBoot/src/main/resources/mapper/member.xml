@@ -48,10 +48,10 @@
 		update
 		members
 		set
-		user_name = #{name}, user_password = #{pw}, user_address =
-		#{addr}, user_phone_number = #{pNumber}
+		user_name = #{username}, user_password = #{userpwd}, user_address =
+		#{useraddr}, user_phone_number = #{userphonenumber}
 		where user_id
-		=#{id}
+		=#{userid}
 	</update>
 
 	<delete id="deleteMember" parameterType="String">

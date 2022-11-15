@@ -18,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -84,19 +85,15 @@ public class MemberController {
 	}
 
 	@PostMapping("/modify")
-	private ResponseEntity<?> modify(MultipartHttpServletRequest req, Model model) {
-		logger.debug("modify user : {}", req.getParameter("username"));
-		
-		MemberDto memberDto = new MemberDto();
-		
+	private ResponseEntity<?> modify(@RequestBody MemberDto member, Model model) {
+		logger.debug("modify user : {}", member.getUserName());
+				
 		Map<String, String> map = new HashMap<>();
-		map.put("userid", req.getParameter("userid"));
-		map.put("userpwd", req.getParameter("userpwd"));
-		map.put("username", req.getParameter("username"));
-		map.put("useraddr", req.getParameter("useraddr"));
-		map.put("userphonenumber", req.getParameter("userphonenumber"));
-		
-		System.out.println(req.getParameter("userid"));
+		map.put("userid", member.getUserId());
+		map.put("userpwd", member.getUserPwd());
+		map.put("username", member.getUserName());
+		map.put("useraddr", member.getUserAddr());
+		map.put("userphonenumber", member.getUserPhoneNum());
 		
 		
 		try {
@@ -115,13 +112,13 @@ public class MemberController {
 
 	@PostMapping("/login")
 	@ResponseBody
-	public ResponseEntity<?> login(MultipartHttpServletRequest req, RedirectAttributes redirectAtt, Model model,
+	public ResponseEntity<?> login(@RequestBody MemberDto member, RedirectAttributes redirectAtt, Model model,
 			HttpSession session, HttpServletResponse response) {
 
-		logger.debug("map : {}", req.getParameter("userid"));
+		logger.debug("map : {}", member.getUserId());
 		Map<String, String> map = new HashMap<>();
-		map.put("userid", req.getParameter("userid"));
-		map.put("userpwd", req.getParameter("userpwd"));
+		map.put("userid", member.getUserId());
+		map.put("userpwd", member.getUserPwd());
 
 		try {
 			MemberDto memberDto = memberService.loginMember(map);
@@ -161,10 +158,26 @@ public class MemberController {
 	}
 
 	@PostMapping("/join")
-	private ResponseEntity<?> join(@RequestParam Map<String, String> map, MemberDto memberDto, Model model) {
-		logger.debug("member info: {}", map.get("userid"));
+	private ResponseEntity<?> join(@RequestBody MemberDto member, MemberDto memberDto, Model model) {
+//		private ResponseEntity<?> join(@RequestParam Map<String, String> map, MemberDto memberDto, Model model) {
+		logger.debug("member info: {}", member.getUserId());
 
 		try {
+			System.out.println(member.getUserId());
+			
+			Map<String, String> map = new HashMap<>();
+			map.put("userid", member.getUserId());
+			map.put("userpwd", member.getUserPwd());
+			map.put("username", member.getUserName());
+			map.put("useraddr", member.getUserAddr());
+			map.put("userphonenumber", member.getUserPhoneNum());
+			
+//			map.set(userid, member.getUserId());
+//            map.set(userpwd, this.signUp.password);
+//            map.set(username, this.signUp.name);
+//            map.set(useraddr, this.signUp.address);
+//            map.set(userphonenumber, this.signUp.phoneNumber);
+			
 			memberService.joinMember(map);
 //			return "redirect:/";
 			return ResponseEntity.status(HttpStatus.ACCEPTED).build();

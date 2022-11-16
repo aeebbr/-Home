@@ -120,4 +120,9 @@ public class AptDto {
 	public void setAptCode(String aptCode) {
 		this.aptCode = aptCode;
 	}
+
+	@Override
+	public String toString() {
+		return "AptDto [sidoName=" + sidoName + ", gugunName=" + gugunName + ", dongName=" + dongName + "]";
+	}
 }

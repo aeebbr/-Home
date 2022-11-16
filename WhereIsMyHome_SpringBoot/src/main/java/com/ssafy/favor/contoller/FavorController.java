@@ -1,5 +1,7 @@
 package com.ssafy.favor.contoller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -68,7 +70,7 @@ public class FavorController {
 		return new ModelAndView("favor/favor");
 	}
 
-	@GetMapping("/insert")
+	@GetMapping(value = "/insert", produces = "application/text; charset=utf8")
 	private ResponseEntity<?> insert(@RequestParam("sidoCode") String sidoCode,
 			@RequestParam("gugunCode") String gugunCode, @RequestParam("dongCode") String dongCode,
 			@RequestParam("sidoName") String sidoName, @RequestParam("gugunName") String gugunName,
@@ -80,11 +82,9 @@ public class FavorController {
 		FavorDto favorDto = new FavorDto();
 
 		favorDto.setUserId(userId);
-
 		favorDto.setSidoCode(sidoCode);
 		favorDto.setGugunCode(gugunCode);
 		favorDto.setDongCode(dongCode);
-
 		favorDto.setSidoName(sidoName);
 		favorDto.setGugunName(gugunName);
 		favorDto.setDongName(dongName);

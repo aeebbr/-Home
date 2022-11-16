@@ -33,7 +33,7 @@ public class AptServiceImpl implements IAptService {
 		}
 
 		List<AptDto> list = aptMapper.selectAptList(sido, gugun, dong);
-
+		System.out.println(list);
 		for (int i = 0; i < list.size() - 1; i++) {
 			for (int j = 0; j < list.size() - 1; j++) {
 				int firstDealAmount = Integer.parseInt(list.get(j).getDealAmount().replace(",", ""));
@@ -67,6 +67,7 @@ public class AptServiceImpl implements IAptService {
 				}
 			}
 		}
+		System.out.println(list);
 		return list;
 	}
 }

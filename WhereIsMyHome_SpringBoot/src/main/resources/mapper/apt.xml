@@ -22,7 +22,7 @@
 		select houseinfo.apartmentName, housedeal.floor, housedeal.area, dongcode.sidoName, dongcode.gugunName, houseinfo.dong, housedeal.dealAmount, houseinfo.lat, houseinfo.lng, houseinfo.dongCode, houseinfo.aptCode, houseinfo.jibun
 		from houseinfo inner join housedeal on (houseinfo.aptCode = housedeal.aptCode)
 		inner join dongcode on (houseinfo.dongCode = dongcode.dongCode)
-		where dongcode.sidoName=#{sido} and dongcode.gugunName=#{gugun} and dongcode.dongName=#{dong}
+		where dongcode.dongCode=#{dong}
 	</select>
 	
 </mapper>

@@ -3,6 +3,7 @@ package com.ssafy.article.dto;
 public class ArticleDto {
 	private int articleno;
 	private String userid;
+	private String username;
 	private String subject;
 	private String content;
 	private int hit;
@@ -22,6 +23,14 @@ public class ArticleDto {
 
 	public void setUserid(String userid) {
 		this.userid = userid;
+	}
+	
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getSubject() {

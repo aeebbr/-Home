@@ -5,17 +5,17 @@
 <mapper namespace="com.ssafy.article.dto.mapper.ArticleMapper">
 
 	<insert id="writeArticle" parameterType="articleDto">
-		insert into board (userid, subject, content, hit, regtime)
+		insert into article (userid, subject, content, hit, regtime)
 		values (#{userid}, #{subject}, #{content}, 0, now())
 	</insert>
 	
 	<select id="listArticle" parameterType="map" resultType="articleDto">
-		select articleno, userid, subject, content, hit,
+		select articleno, userid, (select username from member m where a.userid = m.userid) as username, subject, content, hit,
 				case when date_format(regtime, '%Y%m%d') = date_format(now(), '%Y%m%d')
 				then date_format(regtime, '%H:%i:%s')
 				else date_format(regtime, '%y.%m.%d')
 				end regtime
-		from board
+		from article a
 		<if test="word != null and word != ''">
 			<if test="key == 'subject'">
 				where subject like concat('%', #{word}, '%')
@@ -30,7 +30,7 @@
 	
 	<select id="getTotalCount" parameterType="map" resultType="int">
 		select count(articleno)
-		from board
+		from article
 		<if test="word != null and word != ''">
 			<if test="key == 'subject'">
 				where subject like concat('%', #{word}, '%')
@@ -42,25 +42,25 @@
 	</select>
 	
 	<select id="getArticle" parameterType="int" resultType="articleDto">
-		select articleno, userid, subject, content, hit, regtime
-		from board
+		select articleno, username, userid, subject, content, hit, regtime
+		from article
 		where articleno = #{articleno}
 	</select>
 	
 	<update id="updateHit" parameterType="int">
-		update board
+		update article
 		set hit = hit + 1
 		where articleno = #{articleno}
 	</update>
 	
 	<update id="modifyArticle" parameterType="articleDto">
-		update board
+		update article
 		set subject = #{subject}, content = #{content}
 		where articleno = #{articleno}
 	</update>
 	
 	<delete id="deleteArticle" parameterType="int">
-		delete from board
+		delete from article
 		where articleno = #{articleno}
 	</delete>
 

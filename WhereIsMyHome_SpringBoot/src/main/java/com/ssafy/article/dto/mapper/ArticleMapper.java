@@ -11,9 +11,9 @@ import com.ssafy.board.dto.BoardDto;
 @Mapper
 public interface ArticleMapper {
 	
-	public int writeArticle(ArticleDto boardDto) throws SQLException;
-	public List<ArticleDto> listArticle(BoardDto boardParameterDto) throws SQLException;
-	public int getTotalCount(BoardDto boardParameterDto) throws SQLException;
+	public int writeArticle(ArticleDto articleDto) throws SQLException;
+	public List<ArticleDto> listArticle(BoardDto boardDto) throws SQLException;
+	public int getTotalCount(BoardDto boardDto) throws SQLException;
 	public ArticleDto getArticle(int articleno) throws SQLException;
 	public void updateHit(int articleno) throws SQLException;
 	public int modifyArticle(ArticleDto boardDto) throws SQLException;

@@ -5,31 +5,30 @@
 <mapper namespace="com.ssafy.favor.dto.mapper.FavorMapper">
 
 	<resultMap type="favorDto" id="favor">
-		<result column="user_id" property="userId" />
-		<result column="sidoCode" property="sidoCode" />
-		<result column="guguncode" property="gugunCode" />
+		<result column="favorno" property="id" />
+		<result column="userid" property="userId" />
 		<result column="dongcode" property="dongCode" />
-		<result column="sidoName" property="sidoName" />
-		<result column="gugunName" property="gugunName" />
-		<result column="dongName" property="dongName" />
+		<result column="sidoname" property="sidoName" />
+		<result column="gugunname" property="gugunName" />
+		<result column="dongname" property="dongName" />
 	</resultMap>
 
 	<insert id="insertFavor" parameterType="map">
-		insert into favor(user_id, sidoCode, guguncode, dongcode, sidoName,
-		gugunName, dongName, join_date)
-		select #{userId}, #{sidoCode}, #{gugunCode}, #{dongCode}, #{sidoName},
+		insert into favor(userid, dongcode, sidoname,
+		gugunname, dongname, joindate)
+		select #{userId}, #{dongCode}, #{sidoName},
 		#{gugunName}, #{dongName}, now()
 		from dual
-		where not exists(select * from favor where user_id = #{userId} and dongcode
+		where not exists(select * from favor where userid = #{userId} and dongcode
 		= #{dongCode})
 	</insert>
 
 	<select id="listFavor" parameterType="String" resultMap="favor">
-		select * from favor where user_id = #{userId} order by id
+		select * from favor where userid = #{userId} order by favorno
 	</select>
 
 	<delete id="deleteFavor" parameterType="String">
-	delete from favor where id = #{id}
+	delete from favor where favorno = #{id}
 	</delete>
 
 </mapper>

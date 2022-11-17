@@ -89,11 +89,11 @@ public class MemberController {
 		logger.debug("modify user : {}", member.getUserName());
 				
 		Map<String, String> map = new HashMap<>();
-		map.put("userid", member.getUserId());
-		map.put("userpwd", member.getUserPwd());
-		map.put("username", member.getUserName());
-		map.put("useraddr", member.getUserAddr());
-		map.put("userphonenumber", member.getUserPhoneNum());
+		map.put("userId", member.getUserId());
+		map.put("userPwd", member.getUserPwd());
+		map.put("userName", member.getUserName());
+		map.put("userAddr", member.getUserAddr());
+		map.put("userPhoneNum", member.getUserPhoneNum());
 		
 		
 		try {
@@ -117,8 +117,8 @@ public class MemberController {
 
 		logger.debug("map : {}", member.getUserId());
 		Map<String, String> map = new HashMap<>();
-		map.put("userid", member.getUserId());
-		map.put("userpwd", member.getUserPwd());
+		map.put("userId", member.getUserId());
+		map.put("userPwd", member.getUserPwd());
 
 		try {
 			MemberDto memberDto = memberService.loginMember(map);
@@ -127,7 +127,7 @@ public class MemberController {
 			if (memberDto != null) { // 로그인 성공
 				session.setAttribute("userinfo", memberDto);
 
-				Cookie cookie = new Cookie("ssafy_id", map.get("userid"));
+				Cookie cookie = new Cookie("ssafy_id", map.get("userId"));
 				cookie.setMaxAge(60 * 60 * 24 * 365 * 40);
 //					cookie.setPath("/user");
 
@@ -166,11 +166,11 @@ public class MemberController {
 			System.out.println(member.getUserId());
 			
 			Map<String, String> map = new HashMap<>();
-			map.put("userid", member.getUserId());
-			map.put("userpwd", member.getUserPwd());
-			map.put("username", member.getUserName());
-			map.put("useraddr", member.getUserAddr());
-			map.put("userphonenumber", member.getUserPhoneNum());
+			map.put("userId", member.getUserId());
+			map.put("userPwd", member.getUserPwd());
+			map.put("userName", member.getUserName());
+			map.put("userAddr", member.getUserAddr());
+			map.put("userPhoneNum", member.getUserPhoneNum());
 			
 //			map.set(userid, member.getUserId());
 //            map.set(userpwd, this.signUp.password);

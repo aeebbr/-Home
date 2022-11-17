@@ -5,58 +5,58 @@
 <mapper namespace="com.ssafy.member.dto.mapper.MemberMapper">
 
 	<resultMap type="memberDto" id="member">
-		<result column="user_id" property="userId" />
-		<result column="user_name" property="userName" />
+		<result column="userid" property="userId" />
+		<result column="username" property="userName" />
 	</resultMap>
 
 	<resultMap type="memberDto" id="memberAll" extends="member">
-		<result column="user_password" property="userPwd" />
-		<result column="user_address" property="userAddr" />
-		<result column="user_phone_number" property="userPhoneNum" />
+		<result column="userpwd" property="userPwd" />
+		<result column="useraddress" property="userAddr" />
+		<result column="userphonenumber" property="userPhoneNum" />
 	</resultMap>
 
 	<select id="idCheck" parameterType="String" resultType="int">
 		select
-		count(user_id)
-		from members
-		where user_id = #{userid}
+		count(userid)
+		from member
+		where userid = #{userId}
 	</select>
 
 	<insert id="joinMember" parameterType="memberDto">
-		insert into members
-		(user_id, user_name, user_password, user_address, user_phone_number, join_date)
-		values (#{userid}, #{username}, #{userpwd}, #{useraddr}, #{userphonenumber}, now())
+		insert into member
+		(userid, username, userpwd, useraddress, userphonenumber, joindate)
+		values (#{userId}, #{userName}, #{userPwd}, #{userAddr}, #{userPhoneNum}, now())
 	</insert>
 
 	<select id="loginMember" parameterType="map" resultMap="member">
 		select
-		user_id, user_name
-		from members
-		where user_id = #{userid} and
-		user_password = #{userpwd}
+		userid, username
+		from member
+		where userid = #{userId} and
+		userpwd = #{userPwd}
 	</select>
 
 	<select id="infoMember" parameterType="string"
 		resultMap="memberAll">
-		select user_id, user_name, user_password, user_address,
-		user_phone_number
-		from members
-		where user_id = #{userId}
+		select userid, username, userpwd, useraddress,
+		userphonenumber
+		from member
+		where userid = #{userId}
 	</select>
 
 	<update id="modifyMember" parameterType="map">
 		update
-		members
+		member
 		set
-		user_name = #{username}, user_password = #{userpwd}, user_address =
-		#{useraddr}, user_phone_number = #{userphonenumber}
-		where user_id
-		=#{userid}
+		username = #{userName}, userpwd = #{userPwd}, useraddress =
+		#{userAddr}, userphonenumber = #{userPhoneNum}
+		where userid
+		=#{userId}
 	</update>
 
 	<delete id="deleteMember" parameterType="String">
-		delete from members
-		where user_id = #{userId}
+		delete from member
+		where userid = #{userId}
 	</delete>
 
 </mapper>

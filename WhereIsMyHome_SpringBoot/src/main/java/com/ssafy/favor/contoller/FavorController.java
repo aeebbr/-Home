@@ -82,8 +82,6 @@ public class FavorController {
 		FavorDto favorDto = new FavorDto();
 
 		favorDto.setUserId(userId);
-		favorDto.setSidoCode(sidoCode);
-		favorDto.setGugunCode(gugunCode);
 		favorDto.setDongCode(dongCode);
 		favorDto.setSidoName(sidoName);
 		favorDto.setGugunName(gugunName);

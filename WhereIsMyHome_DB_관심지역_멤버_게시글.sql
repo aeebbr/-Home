@@ -9,7 +9,8 @@ CREATE TABLE IF NOT EXISTS `happyhouse`.`member` (
   `userid` VARCHAR(16) NOT NULL,
   `username` VARCHAR(20) NOT NULL,
   `userpwd` VARCHAR(16) NOT NULL,
-  `email` VARCHAR(20) NULL DEFAULT NULL,
+  `address` VARCHAR(20) NULL DEFAULT NULL,
+  `phonenumber` VARCHAR(20) NULL DEFAULT NULL,
   `joindate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`userid`))
 ENGINE = InnoDB

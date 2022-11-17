@@ -42,8 +42,8 @@
 	</select>
 	
 	<select id="getArticle" parameterType="int" resultType="articleDto">
-		select articleno, username, userid, subject, content, hit, regtime
-		from article
+		select articleno, (select username from member m where a.userid = m.userid) as username, userid, subject, content, hit, regtime
+		from article a
 		where articleno = #{articleno}
 	</select>
 	

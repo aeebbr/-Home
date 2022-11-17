@@ -71,7 +71,6 @@ public class ArticleServiceImpl implements IArticleService {
 	@Override
 	@Transactional
 	public boolean deleteArticle(int articleno) throws Exception {
-		sqlSession.getMapper(ArticleMapper.class).deleteMemo(articleno);
 		return sqlSession.getMapper(ArticleMapper.class).deleteArticle(articleno) == 1;
 	}
 

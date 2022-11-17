@@ -9,8 +9,8 @@ CREATE TABLE IF NOT EXISTS `happyhouse`.`member` (
   `userid` VARCHAR(16) NOT NULL,
   `username` VARCHAR(20) NOT NULL,
   `userpwd` VARCHAR(16) NOT NULL,
-  `address` VARCHAR(20) NULL DEFAULT NULL,
-  `phonenumber` VARCHAR(20) NULL DEFAULT NULL,
+  `useraddress` VARCHAR(20) NULL DEFAULT NULL,
+  `userphonenumber` VARCHAR(20) NULL DEFAULT NULL,
   `joindate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`userid`))
 ENGINE = InnoDB
@@ -18,8 +18,8 @@ DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
 insert into member
-values ('ssafy', '김싸피', 'ssafy', 'ssafy@ssafy.com', now()),
-       ('admin', '관리자', 'admin', 'admin@ssafy.com', now());
+values ('ssafy', '김싸피', 'ssafy', '서울특별시', '010-0000-0000', now()),
+       ('admin', '관리자', 'admin', '대전광역시', '010-0000-0000', now());
 commit;
 ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `happyhouse`.`article` (
@@ -50,6 +50,9 @@ CREATE TABLE `happyhouse`.`favor` (
   `favorno` int(10) NOT NULL AUTO_INCREMENT,
   `userid` VARCHAR(16) NOT NULL,
   `dongcode` VARCHAR(10) NOT NULL,
+  `sidoname` VARCHAR(20) NULL DEFAULT NULL,
+  `gugunname` VARCHAR(20) NULL DEFAULT NULL,
+  `dongname` VARCHAR(20) NULL DEFAULT NULL,
   `joindate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`favorno`),
   INDEX `favor_to_member_fk` (`userid` ASC) VISIBLE,
@@ -64,6 +67,6 @@ AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
   
-insert into favor(userid, dongcode, joindate)
-values('ssafy', '1111010100', now());
+insert into favor(userid, dongcode, sidoname, gugunname, dongname, joindate)
+values('ssafy', '1111010100', '서울특별시', '종로구', '청운동', now());
 commit;

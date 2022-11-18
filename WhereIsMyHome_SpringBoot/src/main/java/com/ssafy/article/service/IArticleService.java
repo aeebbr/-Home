@@ -13,6 +13,6 @@ public interface IArticleService {
 	
 	public ArticleDto getArticle(int articleno) throws Exception;
 	public void updateHit(int articleno) throws Exception;
-	public boolean modifyArticle(ArticleDto boardDto) throws Exception;
+	public boolean modifyArticle(ArticleDto articleDto) throws Exception;
 	public boolean deleteArticle(int articleno) throws Exception;
 }

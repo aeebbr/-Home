@@ -1,6 +1,7 @@
 package com.ssafy.article.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,15 +11,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.article.dto.ArticleDto;
 import com.ssafy.article.service.IArticleService;
 import com.ssafy.board.dto.BoardDto;
-import com.ssafy.member.controller.MemberController;
-
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,8 +31,12 @@ public class ArticleController {
 	private IArticleService articleService;
 
 	@PostMapping
-	public ResponseEntity<String> writeArticle(@RequestBody ArticleDto articleDto) throws Exception {
+	public ResponseEntity<String> writeArticle(@RequestBody Map<String, Object> map) throws Exception {
 		logger.info("writeArticle - 호출");
+		ArticleDto articleDto = new ArticleDto();
+		articleDto.setUserid((String) map.get("userid"));
+		articleDto.setSubject((String) map.get("subject"));
+		articleDto.setContent((String) map.get("content"));
 		if (articleService.writeArticle(articleDto)) {
 			return new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
 		}
@@ -54,8 +57,12 @@ public class ArticleController {
 	}
 	
 	@PutMapping
-	public ResponseEntity<String> modifyArticle(@RequestBody ArticleDto articleDto) throws Exception {
-		logger.info("modifyArticle - 호출 {}", articleDto);
+	public ResponseEntity<String> modifyArticle(@RequestBody Map<String, Object> map) throws Exception {
+		logger.info("modifyArticle - 호출 {}");
+		ArticleDto articleDto = new ArticleDto();
+		articleDto.setArticleno((int) map.get("articleno"));
+		articleDto.setSubject((String) map.get("subject"));
+		articleDto.setContent((String) map.get("content"));
 		
 		if (articleService.modifyArticle(articleDto)) {
 			return new ResponseEntity<String>("SUCCESS", HttpStatus.OK);

@@ -24,7 +24,7 @@ public class ArticleDto {
 	public void setUserid(String userid) {
 		this.userid = userid;
 	}
-	
+
 	public String getUsername() {
 		return username;
 	}

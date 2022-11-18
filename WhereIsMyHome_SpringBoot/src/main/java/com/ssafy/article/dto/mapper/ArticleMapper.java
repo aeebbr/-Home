@@ -16,7 +16,7 @@ public interface ArticleMapper {
 	public int getTotalCount(BoardDto boardDto) throws SQLException;
 	public ArticleDto getArticle(int articleno) throws SQLException;
 	public void updateHit(int articleno) throws SQLException;
-	public int modifyArticle(ArticleDto boardDto) throws SQLException;
+	public int modifyArticle(ArticleDto articleDto) throws SQLException;
 	public void deleteMemo(int articleno) throws SQLException;
 	public int deleteArticle(int articleno) throws SQLException;
 	

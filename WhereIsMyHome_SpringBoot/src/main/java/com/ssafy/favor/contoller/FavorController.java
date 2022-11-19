@@ -57,8 +57,9 @@ public class FavorController {
 	}
 
 	@GetMapping("/{userId}")
-	private ResponseEntity<List<FavorDto>> list(@PathVariable("userId") String userId) throws Exception {
+	private List<FavorDto> list(@PathVariable("userId") String userId) throws Exception {
 		logger.info("관심지역 list - 호출");
-		return new ResponseEntity<List<FavorDto>>(favorService.listFavor(userId), HttpStatus.OK);
+		logger.info(userId);
+		return favorService.listFavor(userId);
 	}
 }

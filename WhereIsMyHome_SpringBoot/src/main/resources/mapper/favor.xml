@@ -33,12 +33,14 @@
 		insert into favor(userid,
 		dongcode, sidoname,
 		gugunname, dongname, joindate)
-		values( #{userId}, #{dongCode}, "${sidoName}", "${gugunName}", "${dongName}", now())
+		values( #{userId},
+		#{dongCode}, "${sidoName}", "${gugunName}", "${dongName}", now())
 	</insert>
 
 	<select id="listFavor" parameterType="String" resultMap="favor">
 		select *
-		from favor where userid = #{userId} order by favorno
+		from favor where userid = #{userId} order by sidoname, gugunname,
+		dongname
 	</select>
 
 	<delete id="deleteFavor" parameterType="String">

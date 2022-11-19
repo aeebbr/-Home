@@ -1,6 +1,6 @@
 package com.ssafy.favor.dto;
 
-public class FavorDto {
+public class FavorDto{
 	String favorNo;
 	String userId;
 	String dongCode;
@@ -61,5 +61,4 @@ public class FavorDto {
 		return "FavorDto [favorNo=" + favorNo + ", userId=" + userId + ", dongCode=" + dongCode + ", sidoName="
 				+ sidoName + ", gugunName=" + gugunName + ", dongName=" + dongName + "]";
 	}
-
 }

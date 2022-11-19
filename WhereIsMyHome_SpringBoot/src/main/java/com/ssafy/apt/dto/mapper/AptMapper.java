@@ -8,5 +8,5 @@ import com.ssafy.apt.dto.AptDto;
 
 @Mapper
 public interface AptMapper {
-	public List<AptDto> selectAptList(String sido, String gugun, String dong);
+	public List<AptDto> selectAptList(String dongCode);
 }

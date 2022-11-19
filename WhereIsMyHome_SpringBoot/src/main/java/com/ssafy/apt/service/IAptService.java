@@ -6,5 +6,5 @@ import com.ssafy.apt.dto.AptDto;
 
 public interface IAptService {
 
-	public List<AptDto> selectAptList(String sido, String gugun, String dong);
+	public List<AptDto> selectAptList(String dongCode);
 }

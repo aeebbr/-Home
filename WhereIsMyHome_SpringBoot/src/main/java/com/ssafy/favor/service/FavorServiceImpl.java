@@ -19,7 +19,7 @@ public class FavorServiceImpl implements FavorService {
 
 	@Override
 	public boolean checkExist(FavorDto favorDto) throws Exception {
-		return favorMapper.checkExist(favorDto) == 0;
+		return favorMapper.checkExist(favorDto) == 1;
 	}
 
 	@Override

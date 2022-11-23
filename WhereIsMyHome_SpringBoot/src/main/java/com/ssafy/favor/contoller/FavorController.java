@@ -40,8 +40,8 @@ public class FavorController {
 		favorDto.setUserId(userId);
 		favorDto.setDongCode(dongCode);
 		logger.info(favorDto.toString());
-	
-		if (favorService.checkExist(favorDto) && favorService.insertFavor(favorDto)) {
+		System.out.println(favorService.checkExist(favorDto));
+		if (!favorService.checkExist(favorDto) && favorService.insertFavor(favorDto)) {
 			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 		}
 		return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);

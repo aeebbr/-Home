@@ -26,7 +26,7 @@ import org.slf4j.LoggerFactory;
 @RequestMapping("/article")
 public class ArticleController {
 	private final Logger logger = LoggerFactory.getLogger(ArticleController.class);
-	
+
 	@Autowired
 	private IArticleService articleService;
 
@@ -48,14 +48,26 @@ public class ArticleController {
 		logger.info("listArticle - 호출");
 		return new ResponseEntity<List<ArticleDto>>(articleService.listArticle(boardDto), HttpStatus.OK);
 	}
-	
+
+	@PostMapping("/search")
+	public ResponseEntity<List<ArticleDto>> searchArticle(@RequestBody Map<String, String> map) throws Exception {
+		logger.info("searchArticle - 호출");
+		BoardDto boardDto = new BoardDto();
+		if (!map.isEmpty()) {
+			logger.info(map.toString());
+			boardDto.setKey(map.get("key"));
+			boardDto.setWord(map.get("word"));
+		}
+		return new ResponseEntity<List<ArticleDto>>(articleService.listArticle(boardDto), HttpStatus.OK);
+	}
+
 	@GetMapping("/{articleno}")
 	public ResponseEntity<ArticleDto> getArticle(@PathVariable("articleno") int articleno) throws Exception {
 		logger.info("getArticle - 호출 : " + articleno);
 		articleService.updateHit(articleno);
 		return new ResponseEntity<ArticleDto>(articleService.getArticle(articleno), HttpStatus.OK);
 	}
-	
+
 	@PutMapping
 	public ResponseEntity<String> modifyArticle(@RequestBody Map<String, Object> map) throws Exception {
 		logger.info("modifyArticle - 호출 {}");
@@ -63,13 +75,13 @@ public class ArticleController {
 		articleDto.setArticleno((int) map.get("articleno"));
 		articleDto.setSubject((String) map.get("subject"));
 		articleDto.setContent((String) map.get("content"));
-		
+
 		if (articleService.modifyArticle(articleDto)) {
 			return new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
 		}
 		return new ResponseEntity<String>("FAIL", HttpStatus.OK);
 	}
-	
+
 	@DeleteMapping("/{articleno}")
 	public ResponseEntity<String> deleteArticle(@PathVariable("articleno") int articleno) throws Exception {
 		logger.info("deleteArticle - 호출");

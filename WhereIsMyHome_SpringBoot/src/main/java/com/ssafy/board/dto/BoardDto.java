@@ -51,5 +51,11 @@ public class BoardDto {
 
 	public void setWord(String word) {
 		this.word = word;
+		
+	}
+
+	@Override
+	public String toString() {
+		return "BoardDto [pg=" + pg + ", spp=" + spp + ", start=" + start + ", key=" + key + ", word=" + word + "]";
 	}
 }

@@ -1,5 +1,6 @@
 package com.ssafy.article.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.article.dto.ArticleDto;
 import com.ssafy.article.service.IArticleService;
-import com.ssafy.board.dto.BoardDto;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,21 +44,21 @@ public class ArticleController {
 	}
 	
 	@GetMapping
-	public ResponseEntity<List<ArticleDto>> listArticle(BoardDto boardDto) throws Exception {
+	public ResponseEntity<List<ArticleDto>> listArticle() throws Exception {
 		logger.info("listArticle - 호출");
-		return new ResponseEntity<List<ArticleDto>>(articleService.listArticle(boardDto), HttpStatus.OK);
+		return new ResponseEntity<List<ArticleDto>>(articleService.listArticle(new HashMap<String, String>()), HttpStatus.OK);
+	}
+	
+	@GetMapping("/latest")
+	public ResponseEntity<List<ArticleDto>> latestArticle() throws Exception {
+		logger.info("latestArticle - 호출");
+		return new ResponseEntity<List<ArticleDto>>(articleService.latestArticle(), HttpStatus.OK);
 	}
 
 	@PostMapping("/search")
 	public ResponseEntity<List<ArticleDto>> searchArticle(@RequestBody Map<String, String> map) throws Exception {
 		logger.info("searchArticle - 호출");
-		BoardDto boardDto = new BoardDto();
-		if (!map.isEmpty()) {
-			logger.info(map.toString());
-			boardDto.setKey(map.get("key"));
-			boardDto.setWord(map.get("word"));
-		}
-		return new ResponseEntity<List<ArticleDto>>(articleService.listArticle(boardDto), HttpStatus.OK);
+		return new ResponseEntity<List<ArticleDto>>(articleService.listArticle(map), HttpStatus.OK);
 	}
 
 	@GetMapping("/{articleno}")

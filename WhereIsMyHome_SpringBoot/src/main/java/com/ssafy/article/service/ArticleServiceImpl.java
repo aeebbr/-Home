@@ -1,15 +1,13 @@
 package com.ssafy.article.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ssafy.article.dto.ArticleDto;
 import com.ssafy.article.dto.mapper.ArticleMapper;
-import com.ssafy.board.dto.BoardDto;
-import com.ssafy.mvc.util.PageNavigation;
-
 @Service
 public class ArticleServiceImpl implements IArticleService {
 	private final ArticleMapper articleMapper;
@@ -28,28 +26,13 @@ public class ArticleServiceImpl implements IArticleService {
 	}
 
 	@Override
-	public List<ArticleDto> listArticle(BoardDto boardDto) throws Exception {
-		int start = boardDto.getPg() == 0 ? 0 : (boardDto.getPg() - 1) * boardDto.getSpp();
-		boardDto.setStart(start);
-		return articleMapper.listArticle(boardDto);
+	public List<ArticleDto> listArticle(Map<String, String> map) throws Exception {
+		return articleMapper.listArticle(map);
 	}
-
+	
 	@Override
-	public PageNavigation makePageNavigation(BoardDto boardDto) throws Exception {
-		int naviSize = 5;
-		PageNavigation pageNavigation = new PageNavigation();
-		pageNavigation.setCurrentPage(boardDto.getPg());
-		pageNavigation.setNaviSize(naviSize);
-		int totalCount = articleMapper.getTotalCount(boardDto);//총글갯수  269
-		pageNavigation.setTotalCount(totalCount);  
-		int totalPageCount = (totalCount - 1) / boardDto.getSpp() + 1;//27
-		pageNavigation.setTotalPageCount(totalPageCount);
-		boolean startRange = boardDto.getPg() <= naviSize;
-		pageNavigation.setStartRange(startRange);
-		boolean endRange = (totalPageCount - 1) / naviSize * naviSize < boardDto.getPg();
-		pageNavigation.setEndRange(endRange);
-		pageNavigation.makeNavigator();
-		return pageNavigation;
+	public List<ArticleDto> latestArticle() throws Exception {
+		return articleMapper.latestArticle();
 	}
 
 	@Override

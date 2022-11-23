@@ -1,29 +1,36 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-	
+
 <mapper namespace="com.ssafy.article.dto.mapper.ArticleMapper">
 
 	<insert id="writeArticle" parameterType="articleDto">
-		insert into article (userid, subject, content, hit, regtime)
-		values (#{userid}, #{subject}, #{content}, 0, now())
+		insert into article
+		(userid, subject, content, hit, regtime)
+		values (#{userid}, #{subject},
+		#{content}, 0, now())
 	</insert>
-	
-	<select id="listArticle" parameterType="map" resultType="articleDto">
-		select articleno, userid, (select username from member m where a.userid = m.userid) as username, subject, content, hit,
-				case when date_format(regtime, '%Y%m%d') = date_format(now(), '%Y%m%d')
-				then date_format(regtime, '%H:%i:%s')
-				else date_format(regtime, '%y.%m.%d')
-				end regtime
+
+	<select id="listArticle" parameterType="map"
+		resultType="articleDto">
+		select articleno, userid, (select username from member m where
+		a.userid = m.userid) as username, subject, content, hit,
+		case when date_format(regtime, '%Y%m%d') = date_format(now(), '%Y%m%d')
+		then date_format(regtime, '%H:%i:%s')
+		else date_format(regtime, '%y.%m.%d')
+		end regtime
 		from article a
 		<if test="word != null and word != ''">
-				where ${key} like concat('%', #{word}, '%')
-
+			where ${key} like concat('%', #{word}, '%')
 		</if>
 		order by articleno desc
-		limit #{start}, #{spp}
 	</select>
-	
+
+	<select id="latestArticle" resultType="articleDto">
+		select * from article
+		order by articleno desc limit 3
+	</select>
+
 	<select id="getTotalCount" parameterType="map" resultType="int">
 		select count(articleno)
 		from article
@@ -36,25 +43,31 @@
 			</if>
 		</if>
 	</select>
-	
-	<select id="getArticle" parameterType="int" resultType="articleDto">
-		select articleno, (select username from member m where a.userid = m.userid) as username, userid, subject, content, hit, regtime
+
+	<select id="getArticle" parameterType="int"
+		resultType="articleDto">
+		select articleno, (select username from member m where
+		a.userid = m.userid) as username, userid, subject, content, hit,
+		regtime
 		from article a
 		where articleno = #{articleno}
 	</select>
-	
+
 	<update id="updateHit" parameterType="int">
 		update article
-		set hit = hit + 1
+		set hit = hit
+		+ 1
 		where articleno = #{articleno}
 	</update>
-	
+
 	<update id="modifyArticle" parameterType="articleDto">
 		update article
-		set subject = #{subject}, content = #{content}
-		where articleno = #{articleno}
+		set
+		subject = #{subject}, content = #{content}
+		where articleno =
+		#{articleno}
 	</update>
-	
+
 	<delete id="deleteArticle" parameterType="int">
 		delete from article
 		where articleno = #{articleno}

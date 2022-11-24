@@ -9,7 +9,7 @@ import com.ssafy.favor.dto.FavorDto;
 import com.ssafy.favor.dto.mapper.FavorMapper;
 
 @Service
-public class FavorServiceImpl implements FavorService {
+public class FavorServiceImpl implements IFavorService {
 	private FavorMapper favorMapper;
 
 	@Autowired
@@ -38,7 +38,7 @@ public class FavorServiceImpl implements FavorService {
 	}
 
 	@Override
-	public boolean deleteFavor(String id) throws Exception {
-		return favorMapper.deleteFavor(id) == 1;
+	public boolean deleteFavor(String favorNo) throws Exception {
+		return favorMapper.deleteFavor(favorNo) == 1;
 	}
 }

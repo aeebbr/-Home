@@ -28,7 +28,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ssafy.member.dto.MemberDto;
-import com.ssafy.member.service.MemberService;
+import com.ssafy.member.service.IMemberService;
 
 import io.swagger.v3.oas.models.media.MediaType;
 
@@ -37,10 +37,10 @@ import io.swagger.v3.oas.models.media.MediaType;
 public class MemberController {
 	private final Logger logger = LoggerFactory.getLogger(MemberController.class);
 
-	private final MemberService memberService;
+	private final IMemberService memberService;
 
 	@Autowired
-	public MemberController(MemberService memberService) {
+	public MemberController(IMemberService memberService) {
 		logger.info("MemberCotroller 생성자 호출!!!!");
 		this.memberService = memberService;
 	}
